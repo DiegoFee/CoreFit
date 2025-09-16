@@ -1,0 +1,72 @@
+/* fuente 1: Titulos */
+@font-face{
+    font-family: "Roboto-Condensed-Light";
+    src: url(./Roboto_Condensed/RobotoCondensed-Light.ttf) format("truetype");
+}
+@font-face{
+    font-family: "Roboto-Condensed-Regular";
+    src: url(./Roboto_Condensed/RobotoCondensed-Regular.ttf) format("truetype");
+}
+@font-face{
+    font-family: "Roboto-Condensed-Medium";
+    src: url(./Roboto_Condensed/RobotoCondensed-Medium.ttf) format("truetype");
+}
+@font-face{
+    font-family: "Roboto-Condensed-SemiBold";
+    src: url(./Roboto_Condensed/RobotoCondensed-SemiBold.ttf) format("truetype");
+}
+@font-face{
+    font-family: "Roboto-Condensed-Bold";
+    src: url(./Roboto_Condensed/RobotoCondensed-Bold.ttf) format("truetype");
+}
+
+/* fuente 2: Sub-titulos */
+@font-face{
+    font-family: "Roboto-Flex-Regular";
+    src: url(./Roboto_Flex/RobotoFlex-VariableFont_GRAD\,XOPQ\,XTRA\,YOPQ\,YTAS\,YTDE\,YTFI\,YTLC\,YTUC\,opsz\,slnt\,wdth\,wght.ttf) format("truetype");
+}
+
+/* fuente 3: Contenido */
+@font-face{
+    font-family: "Quicksand-Light";
+    src: url(./Quicksand/Quicksand-Light.ttf) format("truetype");
+}
+@font-face{
+    font-family: "Quicksand-Regular";
+    src: url(./Quicksand/Quicksand-Regular.ttf) format("truetype");
+}
+@font-face{
+    font-family: "Quicksand-Medium";
+    src: url(./Quicksand/Quicksand-Medium.ttf) format("truetype");
+}
+@font-face{
+    font-family: "Quicksand-SemiBold";
+    src: url(./Quicksand/Quicksand-SemiBold.ttf) format("truetype");
+}
+@font-face{
+    font-family: "Quicksand-Bold";
+    src: url(./Quicksand/Quicksand-Bold.ttf) format("truetype");
+}
+
+/* fuente 3: Otros */
+@font-face{
+    font-family: "Saira-Light";
+    src: url(./Saira/Saira-Light.ttf) format("truetype");
+}
+@font-face{
+    font-family: "Saira-Regular";
+    src: url(./Saira/Saira-Regular.ttf) format("truetype");
+}
+@font-face{
+    font-family: "Saira-Medium";
+    src: url(./Saira/Saira-Medium.ttf) format("truetype");
+}
+@font-face{
+    font-family: "Saira-SemiBold";
+    src: url(./Saira/Saira-SemiBold.ttf) format("truetype");
+}
+@font-face{
+    font-family: "Saira-Bold";
+    src: url(./Saira/Saira-Bold.ttf) format("truetype");
+}
+

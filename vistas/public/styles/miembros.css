@@ -1,0 +1,264 @@
+/* ==============================
+RESET Y BODY
+============================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: var(--font-main);
+  background-color: var(--gris-fondo);
+  color: var(--paua);
+  min-height: 100vh;
+}
+
+/* ==============================
+VARIABLES DE COLORES Y OTROS
+============================== */
+:root {
+  --paua: #120078;
+  --blanco: #FFFFFF;
+  --dodgerblue: #309AFF;
+  --lime: #AFFF00;
+  --gris-fondo: #F5F5F5;
+  --gris-borde: #E0E0E0;
+  --gris-texto: #444;
+
+  --radius: 12px;
+  --shadow: rgba(0,0,0,0.1) 0px 4px 12px;
+  --font-main: 'Segoe UI', Arial, sans-serif;
+}
+
+/* ==============================
+CONTENIDO
+============================== */
+/* contenido principal _________________________________________________________________ */
+.main-content-scroll {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1 0 auto;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.content-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* opciones de la tabla de miembros (registrar y buscar) _______________________________ */
+.controls {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.register-btn {
+  background: var(--lime);
+  color: var(--paua);
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.7rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.register-btn:hover {
+  background: var(--dodgerblue);
+  color: var(--blanco);
+}
+
+.search-bar {
+  flex: 1;
+  min-width: 220px;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--gris-borde);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+.search-bar:focus {
+  border: 1.5px solid var(--dodgerblue);
+}
+
+/* tabla de visualización de miembros existentes _________________________________________ */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--blanco);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--gris-borde);
+  padding: 1rem 0.5rem;
+}
+
+.members-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.members-table th,
+.members-table td {
+  padding: 0.7rem 0.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--gris-borde);
+}
+
+.members-table th {
+  background: var(--paua);
+  color: var(--blanco);
+  font-weight: 600;
+}
+
+.option-btn {
+  background: var(--dodgerblue);
+  color: var(--blanco);
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.option-btn:hover {
+  background: var(--lime);
+  color: var(--paua);
+}
+
+/* formulario de ingeso de nuevo miembro _______________________________________________ */
+#registroMiembro {
+  width: 100%;
+  background: var(--blanco);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 3rem 4vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#registroMiembro h2 {
+  color: var(--paua);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+.registro-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.form-group label {
+  font-weight: 700;
+  color: var(--paua);
+  font-size: 1.15rem;
+}
+.form-group input,
+.form-group select {
+  padding: 1rem;
+  border: 1.5px solid var(--gris-borde);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #f9fafb;
+  color: var(--paua);
+  outline: none;
+  transition: border 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border: 2px solid var(--dodgerblue);
+}
+.form-actions {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+.back-btn {
+  background: var(--gris-borde);
+  color: var(--paua);
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.back-btn:hover {
+  background: #C0C0C0;
+}
+.save-btn {
+  background: var(--lime);
+  color: var(--paua);
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.save-btn:hover {
+  background: #9ACC00;
+}
+
+/* ==============================
+DISEÑO RESPONSIVE
+============================== */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    padding: 1rem 0.5rem;
+    position: static;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .controls {
+    flex-direction: column;
+    gap: 0.7rem;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 500px) {
+  .header {
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 0.7rem 0.5rem;
+  }
+  .members-table {
+    min-width: 400px;
+  }
+}

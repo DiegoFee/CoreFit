@@ -1,0 +1,315 @@
+/* ==============================
+RESET Y BODY
+============================== */
+* {
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--muted);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==============================
+VARIABLES DE COLORES Y OTROS
+============================== */
+:root {
+  --paua: #120078;
+  --white: #ffffff;
+  --muted: #f4f6fa;
+  --dodgerblue: #309AFF;
+  --lime: #AFFF00;
+  --danger: #FF5757;
+  --border: #e6e9ef;
+  --text: #222;
+
+  --radius: 12px;
+  --shadow: rgba(0,0,0,0.1) 0px 4px 12px;
+  --glass: rgba(255, 255, 255, 0.85);
+  --glass-2: rgba(245, 246, 250, 1);
+  --font: 'Segoe UI', Arial, sans-serif;
+}
+
+/* ==============================
+CONTENIDO
+============================== */
+/* contenido principal __________________________________________________________________ */
+.main-content-scroll {
+  margin-top: 3rem;
+  padding: 28px 32px;
+  overflow: auto;
+}
+
+.content-title {
+  text-align: center;
+  font-size: 2rem;
+  margin: 6px 0 18px;
+  font-weight: 600;
+  color: var(--paua);
+}
+
+/* diseño de las opciones (buscar) ______________________________________________________ */
+.controls-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+.search-bar {
+  width: 280px;
+  max-width: 40vw;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--glass-2);
+  outline: none;
+  transition: box-shadow 0.12s ease, border 0.12s ease;
+}
+.search-bar:focus {
+  box-shadow: 0 6px 14px rgba(46, 148, 255, 0.12);
+  border-color: var(--dodgerblue);
+}
+
+/* tabla de pagos ____________________________________________________________________- */
+.table-responsive {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.members-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.members-table thead th {
+  background: var(--paua);
+  color: var(--white);
+  font-weight: 700;
+  padding: 12px;
+  text-align: center;
+}
+.members-table th, .members-table td {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+.members-table tbody tr:nth-child(even) {
+  background: #fcfdff;
+}
+.td-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+/* estado de pago del miembro __________________________________________________________ */
+.badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.badge-active {
+  background: rgba(178, 255, 0, 0.15);
+  color: #2b4e00;
+}
+.badge-inactive {
+  background: rgba(0, 0, 0, 0.06);
+  color: #666;
+}
+.badge-ok {
+  background: rgba(46, 148, 255, 0.12);
+  color: #003e7a;
+}
+.badge-danger {
+  background: rgba(255, 87, 87, 0.12);
+  color: #8b1f1f;
+}
+
+/* botones (pagar / detalles) ___________________________________________________________ */
+.option-btn {
+  background: var(--dodgerblue);
+  color: var(--white);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+.option-btn i {
+  font-size: 0.9rem;
+}
+
+.option-btn:hover {
+  background: #1a78d9;
+}
+.save-btn {
+  background: var(--lime);
+  color: var(--paua);
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 800;
+}
+.btn-secondary {
+  background: #f0f2f6;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/*  diseño general de los modales _______________________________________________________ */
+.modal-window {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+  z-index: 2000;
+  background: rgba(6, 6, 20, 0.45);
+}
+.modal-content {
+  width: 100%;
+  max-width: 980px;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 20px 60px rgba(2, 6, 23, 0.28);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 90vh;
+  overflow: auto;
+  border: 1px solid var(--border);
+}
+.modal-title {
+  font-size: 1.3rem;
+  color: var(--paua);
+  text-align: center;
+  margin: 0 0 6px;
+}
+
+/* diseño del modal pagar _______________________________________________________________ */
+.data-section {
+  background: var(--white);
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.data-section h3 {
+  margin: 0 0 8px;
+  color: var(--paua);
+  font-weight: 800;
+}
+
+.member-data {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.member-data p {
+  margin: 0;
+  padding: 8px;
+  border-radius: 8px;
+  background: var(--dodgerblue); /* Unified solid blue background */
+  color: var(--white); /* White text for contrast */
+  box-shadow: var(--shadow);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* despliegue de datos del modal detalles _______________________________________________ */
+.data-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.payment-form .form-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.payment-form label {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.payment-form input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--white);
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+/* gráfico del modal detalles ____________________________________________________________ */
+#chartPagos {
+  width: 100%;
+  max-height: 260px;
+}
+
+/* ==============================
+DISEÑO RESPONSIVE
+============================== */
+@media (max-width: 980px) {
+  .data-grid {
+    grid-template-columns: 1fr;
+  }
+  .member-data {
+    grid-template-columns: 1fr;
+  }
+  .search-bar {
+    width: 100%;
+  }
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+  .container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 520px) {
+  .option-btn {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+  .members-table th, .members-table td {
+    padding: 8px;
+  }
+  .modal-content {
+    padding: 16px;
+  }
+}

@@ -1,0 +1,158 @@
+/* ==============================
+RESET Y BODY
+============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+  background: var(--blanco);
+  color: var(--paua);
+}
+
+/* ==============================
+VARIABLES DE COLORES Y OTROS
+============================== */
+:root {
+  --paua: #120078;
+  --white: #FFFFFF;
+  --dodgerblue: #309AFF;
+  --lime: #AFFF00;
+  --blanco: #F8F9FA;
+  --gris-texto: #444;
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 1rem;
+  --space-xl: 3rem;
+  --radius: 12px;
+  --transition: 0.3s ease;
+  --shadow: rgba(0,0,0,0.1) 0px 4px 12px;
+}
+
+/* ==============================
+CONTENIDO
+============================== */
+/* contenido principal __________________________________________________________________ */
+.content-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--paua);
+  margin: var(--space-lg) 0 var(--space-md) 0;
+  text-align: center;
+}
+
+/* cartas de estado _____________________________________________________________________ */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-lg);
+  padding: var(--space-md);
+}
+.card {
+  background: var(--white);
+  border: 2px solid var(--dodgerblue);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  text-align: center;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-xs);
+}
+.card-title {
+  font-size: 1rem;
+  color: var(--gris-texto);
+  font-weight: 500;
+}
+.card-value {
+  font-size: 2rem;
+  color: var(--paua);
+  font-weight: bold;
+}
+
+/* registro de asistencia ___________________________________________________________________ */
+.attendance {
+  text-align: center;
+  background: #f9f9f9;
+  padding: var(--space-md);
+  border-radius: var(--radius);
+  margin: var(--space-md);
+}
+.attendance h2 {
+  margin-bottom: var(--space-sm);
+  font-size: 1.3rem;
+}
+.attendance-form {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+.attendance-form input {
+  padding: var(--space-sm);
+  border: 2px solid var(--dodgerblue);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  min-width: 220px;
+  flex: 1 1 auto;
+}
+
+.confirm-btn {
+  background: var(--paua);
+  color: var(--white);
+  border: none;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background var(--transition);
+}
+.confirm-btn:hover {
+  background: var(--lime);
+  color: var(--paua);
+}
+
+/* ==============================
+DISEÑO RESPONSIVE
+============================== */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: var(--space-xs) 0;
+  }
+  .menu {
+    flex-direction: row;
+    gap: var(--space-xs);
+    width: auto;
+  }
+  .menu-item {
+    flex-direction: column;
+    padding: var(--space-xs);
+    font-size: 0.9rem;
+  }
+  .stats {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}

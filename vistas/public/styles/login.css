@@ -1,0 +1,187 @@
+/* ==============================
+RESET Y BODY
+============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  filter: blur(50px);
+  z-index: -1;
+}
+html, body {
+  height: 100%;
+  font-family: var(--otro);
+  font-size: 16px;
+  color: var(--blanco);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #000000, #333366);
+  overflow: hidden;
+}
+
+/* ==============================
+VARIABLES DE COLORES Y OTROS
+============================== */
+:root {
+  --paua: #120078;
+  --blanco: #FFFFFF;
+  --dodgerblue: #309AFF;
+  --lime: #AFFF00;
+
+  --titulo: Roboto-Condensed-Regular, "Arial Narrow"; 
+  --subtitulo: Roboto-Flex-Regular, Arial;
+  --contenido: Quicksand-Regular, Helvetica; 
+  --otro: Saira-Regular, Tahoma;
+        
+  --radius: 12px;
+  --transition: 0.3s ease;
+}
+
+/* ==============================
+CONTENIDO
+============================== */
+/* contenedor de imagen ________________________________________________________________*/
+.contenedor-inicio {
+  display: flex;
+  width: 90%;
+  max-width: 1100px;
+  height: 80vh;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  background: rgba(255, 255, 255, 0.05);
+}
+.contenedor-inicio-imagen {
+  flex: 1;
+  overflow: hidden;
+}
+.contenedor-inicio-imagen img,
+.contenedor-inicio-imagen video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* contenedor de formulario ____________________________________________________________ */
+.contenedor-inicio-formulario {
+  flex: 1;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.contenedor-inicio-formulario h1 {
+  font-family: var(--contenido);
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--lime);
+  text-align: center;
+}
+
+.contenedor-inicio-formulario form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 350px; 
+}
+.contenedor-inicio-formulario label {
+  width: 100%;
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: left;
+}
+.contenedor-inicio-formulario input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1.2rem;
+  border: none;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  color: var(--paua);
+  outline: none;
+  transition: box-shadow var(--transition);
+}
+.contenedor-inicio-formulario input:focus {
+  box-shadow: 0 0 8px var(--dodgerblue);
+}
+
+/*  botón de acceso ____________________________________________________________________ */
+.contenedor-inicio-formulario button {
+  width: 100%;
+  padding: 0.85rem;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1.05rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  background: var(--dodgerblue);
+  color: var(--blanco);
+  margin-top: 0.5rem;
+}
+.contenedor-inicio-formulario button:hover {
+  background: var(--lime);
+  color: var(--paua);
+}
+
+/*  botón de ayuda _____________________________________________________________________ */
+.contenedor-inicio-formulario-parte2 {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.contenedor-inicio-formulario-parte2 p {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+.btn-ayuda {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: bold;
+  background: transparent;
+  color: var(--dodgerblue);
+  text-decoration: none;
+  transition: all var(--transition);
+}
+.btn-ayuda:hover {
+  color: var(--lime);
+}
+
+/* ==============================
+DISEÑO RESPONSIVE
+============================== */
+@media (max-width: 770px) {
+  .contenedor-inicio {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .contenedor-inicio-imagen {
+    width: 100%;
+    height: 250px;
+  }
+
+  .contenedor-inicio-formulario {
+    width: 100%;
+    padding: 2rem 1rem;
+  }
+
+  .contenedor-inicio-formulario form {
+    max-width: 100%;
+  }
+}
