@@ -1,14 +1,11 @@
     <aside class="sidebar" aria-label="Navegación principal">
       <div class="logo-box">
-        <img src="public/images/logo-novacorp.jpg" alt="Logo NovaCorp" class="logo-img">
+        <img src="<?php echo BASE_URL;?>vistas/public/images/logo-novacorp.jpg" alt="Logo NovaCorp" class="logo-img">
       </div>
       <nav class="menu">
         <a href="<?php echo BASE_URL;?>vistas/inicio.php" target="_self" class="menu-item"><i class="fa fa-home"></i> <span>Inicio</span></a>
         <a href="<?php echo BASE_URL;?>vistas/miembros.php" target="_self" class="menu-item"><i class="fa fa-users"></i> <span>Miembros</span></a>
         <a href="<?php echo BASE_URL;?>vistas/pagos.php" target="_self" class="menu-item"><i class="fa fa-dollar-sign"></i> <span>Pagos</span></a>
-        <a href="<?php echo BASE_URL;?>vistas/membresias.php" class="menu-item"><i target="_self" class="fa fa-dumbbell"></i> <span>Membresías</span></a>
-        <a href="<?php echo BASE_URL;?>vistas/whatsapp.php" class="menu-item"><i target="_self" class="fa fa-comment-dots"></i> <span>WhatsApp</span></a>
-        <a href="<?php echo BASE_URL;?>vistas/acerca.php" class="menu-item"><i target="_self" class="fa fa-info-circle"></i> <span>Acerca de</span></a>
       </nav>
 
       <style>
@@ -33,6 +30,7 @@
           flex-direction: column;
           width: 100%;
           gap: var(--space-xs);
+          padding-top: 10vh;
         }
         .menu-item {
           display: flex;
@@ -64,6 +62,7 @@
           display: flex;
           flex-direction: column;
           align-items: center;
+          justify-content:start;
           padding: var(--space-md) 0;
           top: 0;
           z-index: 2;
@@ -99,12 +98,14 @@
             position: fixed;
             top: 0;
             z-index: 1000;
+            justify-content: flex-start;
           }
           .menu {
             flex-direction: row;
             gap: var(--space-xs);
             width: auto;
             padding: 0 var(--space-sm);
+            padding-top: 0;
           }
           .menu-item {
             flex-direction: column;

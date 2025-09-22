@@ -25,7 +25,7 @@ VARIABLES DE COLORES Y OTROS
 
   --space-xs: 0.5rem;
   --space-sm: 1rem;
-  --space-md: 1.5rem;
+  --space-md: 1rem;
   --space-lg: 1rem;
   --space-xl: 3rem;
   --radius: 12px;
@@ -37,6 +37,12 @@ VARIABLES DE COLORES Y OTROS
 CONTENIDO
 ============================== */
 /* contenido principal __________________________________________________________________ */
+.content {
+  flex: 1 0 auto;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
 .content-title {
   font-size: 2rem;
   font-weight: 700;
@@ -130,29 +136,136 @@ DISEÑO RESPONSIVE
     flex-direction: row;
     overflow-x: auto;
     padding: var(--space-xs) 0;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
   }
   .menu {
     flex-direction: row;
     gap: var(--space-xs);
     width: auto;
+    padding: 0 var(--space-sm);
   }
   .menu-item {
     flex-direction: column;
     padding: var(--space-xs);
     font-size: 0.9rem;
+    white-space: nowrap;
+    min-width: 80px;
+  }
+  .menu-item span {
+    font-size: 0.8rem;
+  }
+  .logo-box {
+    margin-bottom: 0;
+    margin-right: var(--space-sm);
+  }
+  .logo-img {
+    height: 40px;
+  }
+  .main-content-wrapper {
+    margin-left: 0;
+    margin-top: 80px;
+  }
+  .stats {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-sm);
+  }
+  .content {
+    padding: var(--space-md);
+  }
+  .content-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    height: 70px;
+  }
+  .menu-item {
+    padding: var(--space-xs) 0.5rem;
+    min-width: 60px;
+  }
+  .menu-item i {
+    font-size: 1rem;
+  }
+  .menu-item span {
+    font-size: 0.7rem;
+  }
+  .logo-img {
+    height: 35px;
+  }
+  .main-content-wrapper {
+    margin-top: 70px;
   }
   .stats {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-sm);
+  }
+  .content {
+    padding: var(--space-sm);
+  }
+  .content-title {
+    font-size: 1.3rem;
+  }
+  .attendance {
+    margin: var(--space-sm);
+    padding: var(--space-sm);
+  }
+  .attendance-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .attendance-form input {
+    min-width: auto;
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-xs);
+  .menu-item {
+    padding: 0.3rem;
+    min-width: 50px;
+  }
+  .menu-item span {
+    display: none;
+  }
+  .logo-img {
+    height: 30px;
+  }
+  .main-content-wrapper {
+    margin-top: 60px;
   }
   .stats {
     grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+  .content {
+    padding: var(--space-xs);
+  }
+  .content-title {
+    font-size: 1.2rem;
+    margin: var(--space-sm) 0;
+  }
+  .card {
+    padding: var(--space-sm);
+  }
+  .card-title {
+    font-size: 0.9rem;
+  }
+  .card-value {
+    font-size: 1.5rem;
+  }
+  .attendance h2 {
+    font-size: 1.1rem;
+  }
+  .attendance-form input {
+    padding: var(--space-xs);
+    font-size: 0.9rem;
+  }
+  .confirm-btn {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.9rem;
   }
 }

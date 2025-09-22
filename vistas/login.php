@@ -1,3 +1,8 @@
+<?php
+require __DIR__ . "/../config.php";
+require __DIR__ . "/../controladores/controladorLogin.php";
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,35 +11,40 @@
   <meta name="author" content="NovaCorp">
   <meta name="description" content="Sistema de gestión de gimnasios 'CoreFit' creado por 'NovaCorp'">
   <title>Iniciar sesión - CoreFit</title>
-  <link rel="stylesheet" href="public/styles/login.css">
-  <link rel="stylesheet" href="public/fonts/fonts.css">
-  <link rel="icon" href="public/icons/favicon.ico" type="image/ico">
+  <link rel="stylesheet" href="<?php echo BASE_URL;?>vistas/public/styles/login.css">
+  <link rel="stylesheet" href="<?php echo BASE_URL;?>vistas/public/fonts/fonts.css">
+  <link rel="icon" href="<?php echo BASE_URL;?>vistas/public/icons/favicon.ico" type="image/ico">
 </head>
 
 <body>
   <main class="contenedor-inicio">
     <div class="contenedor-inicio-imagen">
       <video autoplay muted loop>
-        <source src="public/multimedia/sponsor720.mp4" type="video/mp4">
+        <source src="<?php echo BASE_URL;?>vistas/public/multimedia/sponsor720.mp4" type="video/mp4">
       </video>
     </div>
 
     <section class="contenedor-inicio-formulario">
-      <form class="contenedor-inicio-formulario-parte1" action="#" method="POST" autocomplete="off">
+      <form class="contenedor-inicio-formulario-parte1" method="POST" autocomplete="off">
         <h1>Bienvenido a CoreFit</h1>
-
         <label for="nombre">Usuario</label>
-        <input id="nombre" name="usuario" type="text" placeholder="Nombre de usuario" required>
+        <input name="usuario" id="nombre" type="text" placeholder="Nombre de usuario" required>
 
         <label for="contraseña">Contraseña</label>
-        <input id="contraseña" name="contraseña" type="password" placeholder="Contraseña" required>
+        <input name="contraseña" id="contraseña" type="password" placeholder="Contraseña" required>
 
-        <button type="submit">Acceder</button>
+        <input name="btn-ingresar" id="btn-ingresar" type="submit" value="Acceder">
+        
+        <?php
+          if (!empty($mensaje)) {
+            echo "<div class='mensaje-error'>$mensaje</div>";
+          }
+        ?>  
       </form>
 
       <div class="contenedor-inicio-formulario-parte2">
         <p>¿Necesita ayuda?</p>
-        <a href="#" class="btn-ayuda">Clic aquí</a>
+        <a href="https://github.com/DiegoFee" class="btn-ayuda" target="_self">Clic aquí</a>
       </div>
     </section>
   </main>    

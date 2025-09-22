@@ -1,0 +1,308 @@
+/* ==============================
+RESET Y BODY
+============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+  background: var(--blanco);
+  color: var(--paua);
+}
+
+/* ==============================
+VARIABLES DE COLORES Y OTROS
+============================== */
+:root {
+  --paua: #120078;
+  --white: #FFFFFF;
+  --dodgerblue: #309AFF;
+  --lime: #AFFF00;
+  --blanco: #F8F9FA;
+  --gris-texto: #444;
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1rem;
+  --space-lg: 1rem;
+  --space-xl: 3rem;
+
+  --radius: 12px;
+  --transition: 0.3s ease;
+  --shadow: rgba(0,0,0,0.1) 0px 4px 12px;
+}
+
+/* ==============================
+CONTENIDO
+============================== */
+/* contenido principal __________________________________________________________________ */
+.content {
+  flex: 1 0 auto;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.content-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--paua);
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: var(--space-md) 0;
+  color: var(--paua);
+}
+
+/* contenedor de mensajes ______________________________________________________________ */
+.mensajes-container {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.mensaje-card {
+  background: var(--white);
+  border: 2px solid var(--dodgerblue);
+  border-radius: var(--radius);
+  padding: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  box-shadow: var(--shadow);
+  width: calc(33% - 10px);
+  min-width: 230px;
+  max-height: 250px;
+  overflow-y: auto;
+}
+.mensaje-card h3 {
+  font-size: 1.1rem;
+  color: var(--paua);
+}
+.mensaje-card textarea {
+  resize: none;
+  padding: var(--space-xs);
+  border: 2px solid var(--dodgerblue);
+  border-radius: var(--radius);
+  min-height: 50px;
+  font-size: 0.95rem;
+}
+.mensaje-card input[type="number"] {
+  width: 70px;
+  padding: var(--space-xs);
+  border: 2px solid var(--dodgerblue);
+  border-radius: var(--radius);
+}
+
+/* botones de contenedor de mensajes __________________________________________________ */
+.send-btn,
+.add-btn,
+.search-btn {
+  background: var(--paua);
+  color: var(--white);
+  border: none;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background var(--transition);
+}
+.send-btn:hover,
+.add-btn:hover,
+.search-btn:hover {
+  background: var(--lime);
+  color: var(--paua);
+}
+.add-btn {
+  margin-top: var(--space-sm);
+}
+
+/* contenedor de receptores ___________________________________________________________ */
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: var(--space-md);
+}
+.receptores-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.receptores-table th,
+.receptores-table td {
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+/* acciones de contenedor de receptores _______________________________________________ */
+.search-member {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+.search-member input {
+  flex: 1;
+  padding: var(--space-xs) var(--space-sm);
+  border: 2px solid var(--dodgerblue);
+  border-radius: var(--radius);
+  max-width: 300px;
+}
+
+/* ==============================
+DISEÑO RESPONSIVE
+============================== */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: var(--space-xs) 0;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+  }
+  .main-content-wrapper {
+    margin-left: 0;
+    margin-top: 80px;
+  }
+  .content {
+    padding: var(--space-md);
+  }
+  .content-title {
+    font-size: 1.5rem;
+  }
+  .mensajes-container {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  .mensaje-card {
+    width: 100%;
+    max-width: none;
+  }
+  .cards-wrapper {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content-wrapper {
+    margin-top: 70px;
+  }
+  .content {
+    padding: var(--space-sm);
+  }
+  .content-title {
+    font-size: 1.3rem;
+  }
+  .subtitle {
+    font-size: 1.2rem;
+  }
+  .mensajes-container {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  .mensaje-card {
+    width: 100%;
+    max-width: none;
+    min-width: auto;
+  }
+  .mensaje-card h3 {
+    font-size: 1rem;
+  }
+  .mensaje-card textarea {
+    min-height: 60px;
+    font-size: 0.9rem;
+  }
+  .mensaje-card input[type="number"] {
+    width: 60px;
+  }
+  .search-member {
+    flex-direction: column;
+    gap: var(--space-xs);
+    align-items: stretch;
+  }
+  .search-member input {
+    max-width: none;
+    width: 100%;
+  }
+  .receptores-table {
+    font-size: 0.9rem;
+  }
+  .receptores-table th,
+  .receptores-table td {
+    padding: 0.4rem 0.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content-wrapper {
+    margin-top: 60px;
+  }
+  .content {
+    padding: var(--space-xs);
+  }
+  .content-title {
+    font-size: 1.2rem;
+    margin: var(--space-sm) 0;
+  }
+  .subtitle {
+    font-size: 1.1rem;
+  }
+  .mensajes-container {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  .mensaje-card {
+    width: 100%;
+    max-width: none;
+    min-width: auto;
+    padding: var(--space-sm);
+  }
+  .mensaje-card h3 {
+    font-size: 0.9rem;
+  }
+  .mensaje-card textarea {
+    min-height: 50px;
+    font-size: 0.8rem;
+    padding: 0.4rem;
+  }
+  .mensaje-card input[type="number"] {
+    width: 50px;
+    padding: 0.4rem;
+  }
+  .send-btn, .add-btn, .search-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  .search-member {
+    flex-direction: column;
+    gap: var(--space-xs);
+    align-items: stretch;
+  }
+  .search-member input {
+    max-width: none;
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  .receptores-table {
+    font-size: 0.8rem;
+    min-width: 400px;
+  }
+  .receptores-table th,
+  .receptores-table td {
+    padding: 0.3rem 0.2rem;
+  }
+  .table-wrapper {
+    overflow-x: auto;
+  }
+}

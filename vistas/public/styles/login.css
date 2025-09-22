@@ -118,7 +118,7 @@ CONTENIDO
 }
 
 /*  botón de acceso ____________________________________________________________________ */
-.contenedor-inicio-formulario button {
+.contenedor-inicio-formulario #btn-ingresar {
   width: 100%;
   padding: 0.85rem;
   border: none;
@@ -132,9 +132,18 @@ CONTENIDO
   color: var(--blanco);
   margin-top: 0.5rem;
 }
-.contenedor-inicio-formulario button:hover {
+.contenedor-inicio-formulario #btn-ingresar:hover {
   background: var(--lime);
   color: var(--paua);
+}
+
+.mensaje-error {
+  color: #fff;
+  background: #e74c3c;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: var(--radius);
+  text-align: center;
 }
 
 /*  botón de ayuda _____________________________________________________________________ */
@@ -165,10 +174,23 @@ CONTENIDO
 /* ==============================
 DISEÑO RESPONSIVE
 ============================== */
+@media (max-width: 1024px) {
+  .contenedor-inicio {
+    width: 95%;
+    max-width: 900px;
+    height: auto;
+    min-height: 70vh;
+  }
+}
+
 @media (max-width: 770px) {
   .contenedor-inicio {
     flex-direction: column;
     height: auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
   }
 
   .contenedor-inicio-imagen {
@@ -183,5 +205,45 @@ DISEÑO RESPONSIVE
 
   .contenedor-inicio-formulario form {
     max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .contenedor-inicio {
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .contenedor-inicio-imagen {
+    height: 200px;
+  }
+
+  .contenedor-inicio-formulario {
+    padding: 1.5rem 1rem;
+    justify-content: flex-start;
+  }
+
+  .contenedor-inicio-formulario h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contenedor-inicio-formulario input {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .contenedor-inicio-formulario #btn-ingresar {
+    padding: 0.7rem;
+    font-size: 1rem;
+  }
+
+  .contenedor-inicio-formulario-parte2 {
+    margin-top: 1rem;
+  }
+
+  .btn-ayuda {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
   }
 }

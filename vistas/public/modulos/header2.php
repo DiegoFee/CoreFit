@@ -1,13 +1,13 @@
       <header class="header">  
         <!-- CONTENIDO DEL CONTENEDOR <HEADER> -->
         <div class="app-icon">
-          <img src="<?php echo BASE_URL;?>/vistas/public/icons/favicon.ico" alt="Icono de la aplicación">
+          <img src="<?php echo BASE_URL;?>vistas/public/icons/favicon.ico" alt="Icono de la aplicación">
         </div>
         <div class="user-box">
-          <span class="user-type">Administrador</span>
+          <span class="user-type">Recepcionista</span>
             <a href="<?php echo BASE_URL; ?>controladores/controladorLogin.php?logout=1" class="logout-btn">Cerrar sesión</a>          
           <div class="user-icon">
-            <img src="<?php echo BASE_URL;?>vistas/public/icons/usuario.ico" alt="Icono de usuario">
+            <img src="<?php echo BASE_URL;?>vistas/public/icons/usuario2.ico" alt="Icono de usuario">
           </div>
         </div>
 

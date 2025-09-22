@@ -1,3 +1,9 @@
+<?php
+require __DIR__ . "/../config.php";
+require __DIR__ . "/../controladores/controladorLogin.php";
+$usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,29 +11,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="NovaCorp">
   <meta name="description" content="Sistema de gestión de gimnasios 'CoreFit' creado por 'NovaCorp'">
-  <title>Membresías - CoreFit</title>
-  <link rel="stylesheet" href="public/styles/inicio.css">
-  <link rel="stylesheet" href="public/styles/membresias.css">
+  <title>CoreFit</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="icon" href="public/icons/favicon.ico" type="image/ico">
+  <link rel="stylesheet" href="<?php echo BASE_URL;?>vistas/public/styles/inicio.css">
+  <link rel="stylesheet" href="<?php echo BASE_URL;?>vistas/public/styles/membresias.css">
+  <link rel="icon" href="<?php echo BASE_URL;?>vistas/public/icons/favicon.ico" type="image/ico">
 </head>
 <body>
   <div class="container">
     <!-- SIDEBAR (IMPORTADO DESDE MODULOS) -->
     <?php
-    echo '<aside class="sidebar" aria-label="Navegación principal">';
-      include "public/modulos/aside.php";
+      if ($usuario == "Administrador") {
+        include __DIR__ . "/public/modulos/aside.php";
+      } elseif ($usuario == "Recepcionista") {
+        include __DIR__ . "/public/modulos/aside2.php";
+      } else {
+        include __DIR__ . "/public/modulos/permission.php";
+        exit();
+      }
       echo '<style> .menu-item:nth-child(4) { background: var(--lime); color: var(--paua); } </style>';
-    echo '</aside>';
     ?>
 
     <!-- CONTENIDO PRINCIPAL -->
     <div class="main-content-wrapper">
       <!-- HEADER (IMPORTADO DESDE MODULOS) -->
       <?php
-      echo '<header class="header">';
-        include "public/modulos/header.php";
-      echo '</header>';
+        if ($usuario == "Administrador") {
+          include __DIR__ . "/public/modulos/header.php";
+        } elseif ($usuario == "Recepcionista") {
+          include __DIR__ . "/public/modulos/header2.php";
+        } else {
+          echo "No tiene permiso para ver este apartado";
+        }
       ?>
 
       <!-- CONTENIDO -->
@@ -47,7 +62,7 @@
                 <tr>
                   <th>ID</th>
                   <th>Nombre</th>
-                  <th>Tipo</th>
+                  <!-- <th>Tipo</th> -->
                   <th>Meses</th>
                   <th>Modalidad</th>
                   <th>Precio (Q)</th>
@@ -59,7 +74,7 @@
                 <tr>
                   <td>001</td>
                   <td>Membresía Básica</td>
-                  <td>Normal</td>
+                  <!-- <td>Normal</td> -->
                   <td>3</td>
                   <td>Mensual</td>
                   <td>Q300</td>
@@ -82,18 +97,18 @@
             <div class="registro-grid">
               <div class="form-row">
                   <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" placeholder="Nombre de la membresía">
+                    <label for="nombre">Nombre *</label>
+                    <input type="text" id="nombre" placeholder="Nombre de la membresía" required>
                   </div>
                   <div class="form-group">
-                    <label for="meses">Meses</label>
-                    <input type="number" id="meses" min="1" placeholder="Cantidad de meses">
+                    <label for="meses">Meses *</label>
+                    <input type="number" id="meses" min="1" placeholder="Cantidad de meses" required>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group">
-                    <label for="modalidad">Modalidad</label>
-                      <select id="modalidad">
+                    <label for="modalidad">Modalidad *</label>
+                      <select id="modalidad" required>
                         <option value="">Seleccione...</option>
                         <option value="diario">Diario</option>
                         <option value="mensual">Mensual</option>
@@ -101,8 +116,8 @@
                       </select>
                   </div>
                   <div class="form-group">
-                    <label for="precio">Precio (Q)</label>
-                    <input type="number" id="precio" min="0" placeholder="Precio en quetzales">
+                    <label for="precio">Precio (Q) *</label>
+                    <input type="number" id="precio" min="0" placeholder="Precio en quetzales" required>
                   </div>
                 </div>
                 <div class="form-row">
@@ -124,6 +139,6 @@
   </div>
 
   <!-- JS PARA DESPLIEGUE DE REGISRO DE NUEVA MEMBRESIA -->
-  <script defer src="public/scripts/membresias.js"></script>
+  <script src="<?php echo BASE_URL;?>vistas/public/scripts/membresias.js"></script>
 </body>
 </html>

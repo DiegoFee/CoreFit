@@ -14,9 +14,9 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
   <title>CoreFit</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="<?php echo BASE_URL;?>vistas/public/styles/inicio.css">
+  <link rel="stylesheet" href="<?php echo BASE_URL;?>vistas/public/styles/acerca.css">
   <link rel="icon" href="<?php echo BASE_URL;?>vistas/public/icons/favicon.ico" type="image/ico">
 </head>
-
 <body>
   <div class="container">
     <!-- SIDEBAR (IMPORTADO DESDE MODULOS) -->
@@ -29,7 +29,7 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
         include __DIR__ . "/public/modulos/permission.php";
         exit();
       }
-      echo '<style> .menu-item:nth-child(1) { background: var(--lime); color: var(--paua); } </style>';
+      echo '<style> .menu-item:nth-child(6) { background: var(--lime); color: var(--paua); } </style>';
     ?>
 
     <!-- CONTENIDO PRINCIPAL -->
@@ -47,49 +47,49 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 
       <!-- CONTENIDO -->
       <main class="main-content-scroll">
-        <section class="content content-dashboard">
-          <h1 class="content-title">Panel de Control</h1>
+        <section class="content content-acerca">
+          <h1 class="content-title">Detalles de la Empresa Cliente</h1>
 
-          <!-- CARTAS DE CONTENIDO -->
-          <div class="stats">
-            <div class="card">
-              <div class="card-icon"><i class="fa fa-users"></i></div>
-              <div class="card-title">Cantidad de miembros</div>
-              <div class="card-value">0</div>
-              <div class="card-sub">Actualizado hace 1 min</div>
+          <!-- ESPACIO PARA LA SUBIDA DE LOGO -->
+          <div class="card-inner logo-section">
+            <div class="logo-preview">
+              <img id="company-logo" src="public/images/logo-novacorp.jpg" alt="Logo de la empresa">
             </div>
-            <div class="card">
-              <div class="card-icon"><i class="fa fa-calendar-check"></i></div>
-              <div class="card-title">Asistencias del día</div>
-              <div class="card-value">0</div>
-              <div class="card-sub">Actualizado hace 1 min</div>
-            </div>
-            <div class="card">
-              <div class="card-icon"><i class="fa fa-dumbbell"></i></div>
-              <div class="card-title">Cantidad de membresías</div>
-              <div class="card-value">0</div>
-              <div class="card-sub">Actualizado hace 1 min</div>
-            </div>
-            <div class="card">
-              <div class="card-icon"><i class="fa fa-dollar-sign"></i></div>
-              <div class="card-title">Pagos pendientes</div>
-              <div class="card-value">0</div>
-              <div class="card-sub">Actualizado hace 1 min</div>
+            <div class="logo-actions">
+              <input type="file" id="logo-input" accept="image/*">
+              <div class="buttons">
+                <button id="save-logo-btn" class="save-btn">Guardar Imagen</button>
+                <button id="delete-logo-btn" class="delete-btn">Eliminar Imagen</button>
+              </div>
             </div>
           </div>
 
-          <!-- REGISTRO DE ASISTENCIA -->
-          <div class="attendance">
-            <h2>Registro de asistencia</h2>
-            <form class="attendance-form">
-              <input type="text" placeholder="Ingrese ID manualmente o por tarjeta">
-              <button type="submit" class="confirm-btn">Confirmar asistencia</button>
-            </form>
+          <!-- ESPACIO PARA LA SUBIDA DE DATOS -->
+          <div class="card-inner datos-empresa">
+            <label>Nombre de la empresa:</label>
+            <input type="text" placeholder="Nombre de la empresa cliente">
+
+            <label>Teléfono de la empresa:</label>
+            <input type="text" placeholder="Teléfono de la empresa cliente">
+
+            <label>Dueño de la empresa:</label>
+            <input type="text" placeholder="Nombre del dueño">
+
+            <label>Correo de la empresa:</label>
+            <input type="email" placeholder="Correo de la empresa cliente">
+
+            <div class="action-buttons">
+              <button class="delete-btn">Borrar Cambios</button>
+              <button class="save-btn">Guardar Cambios</button>
+            </div>
           </div>
 
         </section>
       </main>
     </div>
   </div>
+
+  <!-- JS PARA DESPLIEGUE DE ACCIONES BÁSICAS -->
+  <script src="<?php echo BASE_URL;?>vistas/public/scripts/acerca.js"></script>
 </body>
 </html>

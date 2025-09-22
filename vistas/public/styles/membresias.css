@@ -34,12 +34,6 @@ VARIABLES DE COLORES Y OTROS
 CONTENIDO
 ============================== */
 /* contenido principal __________________________________________________________________ */
-.main-content-scroll {
-  flex: 1;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
 .content {
   flex: 1 0 auto;
   padding: 2.5rem 2rem;
@@ -49,7 +43,7 @@ CONTENIDO
 }
 .content-title {
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 1rem;
 }
 
@@ -223,36 +217,124 @@ CONTENIDO
 /* ==============================
 DISEÑO RESPONSIVE
 ============================== */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .container {
     flex-direction: column;
   }
   .sidebar {
     width: 100%;
+    height: auto;
     flex-direction: row;
-    padding: 1rem 0.5rem;
-    position: static;
+    overflow-x: auto;
+    padding: var(--space-xs) 0;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+  }
+  .main-content-wrapper {
+    margin-left: 0;
+    margin-top: 80px;
+  }
+  .content {
+    padding: var(--space-md);
+  }
+  .content-title {
+    font-size: 1.5rem;
   }
   .form-row {
     grid-template-columns: 1fr;
   }
+  .members-table {
+    min-width: 600px;
+  }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
+  .main-content-wrapper {
+    margin-top: 70px;
+  }
+  .content {
+    padding: var(--space-sm);
+  }
+  .content-title {
+    font-size: 1.3rem;
+  }
   .controls {
     flex-direction: column;
     gap: 0.7rem;
     align-items: stretch;
   }
+  .search-bar {
+    min-width: auto;
+    width: 100%;
+  }
+  .members-table {
+    min-width: 500px;
+  }
+  .members-table th,
+  .members-table td {
+    padding: 0.5rem 0.3rem;
+    font-size: 0.9rem;
+  }
+  .option-btn {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+  }
 }
 
-@media (max-width: 500px) {
-  .header {
+@media (max-width: 480px) {
+  .main-content-wrapper {
+    margin-top: 60px;
+  }
+  .content {
+    padding: var(--space-xs);
+  }
+  .content-title {
+    font-size: 1.2rem;
+    margin: var(--space-sm) 0;
+  }
+  .controls {
     flex-direction: column;
-    gap: 0.7rem;
-    padding: 0.7rem 0.5rem;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+  .register-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  .search-bar {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
   }
   .members-table {
     min-width: 400px;
+  }
+  .members-table th,
+  .members-table td {
+    padding: 0.4rem 0.2rem;
+    font-size: 0.8rem;
+  }
+  .option-btn {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.7rem;
+  }
+  #registroMembresia {
+    padding: 2rem 1rem;
+  }
+  #registroMembresia h2 {
+    font-size: 1.3rem;
+  }
+  .form-group input,
+  .form-group select {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+  .form-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .back-btn, .save-btn {
+    width: 100%;
+    padding: 0.8rem;
   }
 }

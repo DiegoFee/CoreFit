@@ -40,17 +40,17 @@ VARIABLES DE COLORES Y OTROS
 CONTENIDO
 ============================== */
 /* contenido principal __________________________________________________________________ */
-.main-content-scroll {
-  margin-top: 3rem;
-  padding: 28px 32px;
-  overflow: auto;
+.content {
+  flex: 1 0 auto;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
 }
-
 .content-title {
   text-align: center;
   font-size: 2rem;
-  margin: 6px 0 18px;
-  font-weight: 600;
+  margin: 20px 0 18px 0;
+  font-weight: 700;
   color: var(--paua);
 }
 
@@ -281,7 +281,30 @@ CONTENIDO
 /* ==============================
 DISEÑO RESPONSIVE
 ============================== */
-@media (max-width: 980px) {
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: var(--space-xs) 0;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+  }
+  .main-content-wrapper {
+    margin-left: 0;
+    margin-top: 80px;
+  }
+  .content {
+    padding: var(--space-md);
+  }
+  .content-title {
+    font-size: 1.5rem;
+  }
   .data-grid {
     grid-template-columns: 1fr;
   }
@@ -291,25 +314,122 @@ DISEÑO RESPONSIVE
   .search-bar {
     width: 100%;
   }
-  .sidebar {
-    position: relative;
-    width: 100%;
-    height: auto;
-  }
-  .container {
-    flex-direction: column;
+  .members-table {
+    min-width: 600px;
   }
 }
 
-@media (max-width: 520px) {
-  .option-btn {
-    padding: 8px 10px;
+@media (max-width: 768px) {
+  .main-content-wrapper {
+    margin-top: 70px;
+  }
+  .content {
+    padding: var(--space-sm);
+  }
+  .content-title {
+    font-size: 1.3rem;
+  }
+  .controls-row {
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: stretch;
+  }
+  .search-bar {
+    width: 100%;
+    max-width: none;
+  }
+  .members-table {
+    min-width: 500px;
+  }
+  .members-table th,
+  .members-table td {
+    padding: 0.5rem 0.3rem;
     font-size: 0.9rem;
   }
-  .members-table th, .members-table td {
-    padding: 8px;
+  .option-btn {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  .td-actions {
+    flex-direction: column;
+    gap: 0.3rem;
   }
   .modal-content {
-    padding: 16px;
+    padding: 1rem;
+    margin: 1rem;
+  }
+  .data-grid {
+    grid-template-columns: 1fr;
+  }
+  .member-data {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content-wrapper {
+    margin-top: 60px;
+  }
+  .content {
+    padding: var(--space-xs);
+  }
+  .content-title {
+    font-size: 1.2rem;
+    margin: var(--space-sm) 0;
+  }
+  .controls-row {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+  .search-bar {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  .members-table {
+    min-width: 400px;
+  }
+  .members-table th,
+  .members-table td {
+    padding: 0.4rem 0.2rem;
+    font-size: 0.8rem;
+  }
+  .option-btn {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.7rem;
+  }
+  .td-actions {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .modal-content {
+    padding: 0.8rem;
+    margin: 0.5rem;
+    max-height: 95vh;
+  }
+  .modal-title {
+    font-size: 1.1rem;
+  }
+  .data-section {
+    padding: 0.8rem;
+  }
+  .data-section h3 {
+    font-size: 1rem;
+  }
+  .member-data p {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  .payment-form .form-row {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .form-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .back-btn, .save-btn {
+    width: 100%;
+    padding: 0.8rem;
   }
 }
