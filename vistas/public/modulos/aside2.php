@@ -1,6 +1,6 @@
     <aside class="sidebar" aria-label="Navegación principal">
       <div class="logo-box">
-        <img src="<?php echo BASE_URL;?>vistas/public/images/logo-novacorp.jpg" alt="Logo NovaCorp" class="logo-img">
+        <img src="<?php echo BASE_URL . 'vistas/public/files/logos/' . (isset($logoAside) ? $logoAside : 'logo-novacorp.jpg'); ?>" alt="Logo Gimnasio" class="logo-img">
       </div>
       <nav class="menu">
         <a href="<?php echo BASE_URL;?>vistas/inicio.php" target="_self" class="menu-item"><i class="fa fa-home"></i> <span>Inicio</span></a>
@@ -98,7 +98,8 @@
             position: fixed;
             top: 0;
             z-index: 1000;
-            justify-content: flex-start;
+            overflow-y: hidden;
+            justify-content: center;
           }
           .menu {
             flex-direction: row;

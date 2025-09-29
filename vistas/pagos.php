@@ -1,7 +1,15 @@
 <?php
+// importes generales
 require __DIR__ . "/../config.php";
 require __DIR__ . "/../controladores/controladorLogin.php";
 $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
+
+// ajustes para que se muestre el logo personalizado
+require_once __DIR__ . "/../conexionMysql.php";
+require_once __DIR__ . "/../modelos/modeloAcerca.php";
+$modeloAcerca = new ModeloAcerca($conexion);
+$acerca = $modeloAcerca->obtenerAcerca();
+$logoAside = ($acerca && $acerca['logo']) ? $acerca['logo'] : 'logo-novacorp.jpg';
 ?>
 
 <!DOCTYPE html>
@@ -163,7 +171,7 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
         <div id="miembroDatosDetalles" class="member-data"></div>
         <div class="form-actions">
           <button class="option-btn" id="verFotoBtn"><i class="fa fa-image"></i> Ver foto</button>
-          <button class="option-btn" id="imprimirRegistroBtn"><i class="fa fa-print"></i> Imprimir registro</button>
+          <button class="option-btn" id="imprimirRegistroBtn"><i class="fa fa-print"></i> Imprimir registro de actividad (PDF)</button>
         </div>
       </div>
 
@@ -193,7 +201,7 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
         </div>
 
         <div class="form-actions">
-          <button id="imprimirHistoriaBtn" class="save-btn"><i class="fa fa-file-pdf"></i> Imprimir historia de pagos (PDF)</button>
+          <button id="imprimirHistoriaBtn" class="save-btn"><i class="fa fa-print"></i> Imprimir historial de pagos (PDF)</button>
         </div>
       </div>
     </div>

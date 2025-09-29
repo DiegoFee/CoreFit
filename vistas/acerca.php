@@ -1,7 +1,15 @@
 <?php
+// importes generales
 require __DIR__ . "/../config.php";
 require __DIR__ . "/../controladores/controladorLogin.php";
 $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
+
+// ajustes para que se muestre el logo personalizado
+require_once __DIR__ . "/../modelos/modeloAcerca.php";
+require_once __DIR__ . "/../conexionMysql.php";
+$modelo = new ModeloAcerca($conexion);
+$acerca = $modelo->obtenerAcerca();
+$logo = ($acerca && $acerca['logo']) ? $acerca['logo'] : 'logo-novacorp.jpg';
 ?>
 
 <!DOCTYPE html>
@@ -22,8 +30,10 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
     <!-- SIDEBAR (IMPORTADO DESDE MODULOS) -->
     <?php
       if ($usuario == "Administrador") {
+        $logoAside = $logo;
         include __DIR__ . "/public/modulos/aside.php";
       } elseif ($usuario == "Recepcionista") {
+        $logoAside = $logo;
         include __DIR__ . "/public/modulos/aside2.php";
       } else {
         include __DIR__ . "/public/modulos/permission.php";
@@ -50,46 +60,51 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
         <section class="content content-acerca">
           <h1 class="content-title">Detalles de la Empresa Cliente</h1>
 
-          <!-- ESPACIO PARA LA SUBIDA DE LOGO -->
-          <div class="card-inner logo-section">
-            <div class="logo-preview">
-              <img id="company-logo" src="public/images/logo-novacorp.jpg" alt="Logo de la empresa">
-            </div>
-            <div class="logo-actions">
-              <input type="file" id="logo-input" accept="image/*">
-              <div class="buttons">
-                <button id="save-logo-btn" class="save-btn">Guardar Imagen</button>
-                <button id="delete-logo-btn" class="delete-btn">Eliminar Imagen</button>
+          <form class="card-inner datos-empresa" method="POST" action="<?php echo BASE_URL; ?>controladores/controladorAcerca.php" enctype="multipart/form-data">
+            <input type="hidden" name="accion" value="<?php echo $acerca ? 'actualizar' : 'crear'; ?>">
+            <?php if ($acerca): ?>
+              <input type="hidden" name="id" value="<?php echo htmlspecialchars($acerca['id']); ?>">
+            <?php endif; ?>
+
+            <div class="logo-section">
+              <div class="logo-preview">
+                <img id="company-logo"
+                  src="<?php echo BASE_URL . 'vistas/public/files/logos/' . $logo; ?>"
+                  data-default="<?php echo BASE_URL . 'vistas/public/images/logo-novacorp.jpg'; ?>"
+                  alt="Logo de la empresa">
+              </div>
+              <div class="logo-actions">
+                <input type="file" name="logo" id="logo-input" accept="image/*">
+                <label style="display:block;margin-top:8px;">
+                  <input type="checkbox" name="restaurar_logo" id="restaurar-logo">
+                  Restaurar logo por defecto
+                </label>
               </div>
             </div>
-          </div>
 
-          <!-- ESPACIO PARA LA SUBIDA DE DATOS -->
-          <div class="card-inner datos-empresa">
             <label>Nombre de la empresa:</label>
-            <input type="text" placeholder="Nombre de la empresa cliente">
+            <input type="text" name="nombre" value="<?php echo $acerca ? htmlspecialchars($acerca['nombre']) : ''; ?>" placeholder="Nombre de la empresa cliente">
 
             <label>Teléfono de la empresa:</label>
-            <input type="text" placeholder="Teléfono de la empresa cliente">
+            <input type="text" name="contacto" value="<?php echo $acerca ? htmlspecialchars($acerca['contacto']) : ''; ?>" placeholder="Teléfono de la empresa cliente">
 
             <label>Dueño de la empresa:</label>
-            <input type="text" placeholder="Nombre del dueño">
+            <input type="text" name="dueno" value="<?php echo $acerca ? htmlspecialchars($acerca['dueno']) : ''; ?>" placeholder="Nombre del dueño">
 
             <label>Correo de la empresa:</label>
-            <input type="email" placeholder="Correo de la empresa cliente">
+            <input type="email" name="correo" value="<?php echo $acerca ? htmlspecialchars($acerca['correo']) : ''; ?>" placeholder="Correo de la empresa cliente">
 
             <div class="action-buttons">
-              <button class="delete-btn">Borrar Cambios</button>
-              <button class="save-btn">Guardar Cambios</button>
+              <input type="reset" class="delete-btn" value="Borrar Cambios">
+              <input type="submit" class="save-btn" value="Guardar Cambios">
             </div>
-          </div>
-
+          </form>
         </section>
       </main>
     </div>
   </div>
-
-  <!-- JS PARA DESPLIEGUE DE ACCIONES BÁSICAS -->
+  
+  <!-- JS PARA EL CONTROL DEL LOGO PERSONALIZADO EN EL ASIDE -->
   <script src="<?php echo BASE_URL;?>vistas/public/scripts/acerca.js"></script>
 </body>
 </html>

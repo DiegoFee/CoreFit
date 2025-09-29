@@ -1,7 +1,15 @@
 <?php
+// importes generales
 require __DIR__ . "/../config.php";
 require __DIR__ . "/../controladores/controladorLogin.php";
 $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
+
+// ajustes para que se muestre el logo personalizado
+require_once __DIR__ . "/../conexionMysql.php";
+require_once __DIR__ . "/../modelos/modeloAcerca.php";
+$modeloAcerca = new ModeloAcerca($conexion);
+$acerca = $modeloAcerca->obtenerAcerca();
+$logoAside = ($acerca && $acerca['logo']) ? $acerca['logo'] : 'logo-novacorp.jpg';
 ?>
 
 <!DOCTYPE html>

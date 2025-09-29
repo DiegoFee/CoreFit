@@ -1,7 +1,15 @@
 <?php
+// importes generales
 require __DIR__ . "/../config.php";
 require __DIR__ . "/../controladores/controladorLogin.php";
 $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
+
+// ajustes para que se muestre el logo personalizado
+require_once __DIR__ . "/../conexionMysql.php";
+require_once __DIR__ . "/../modelos/modeloAcerca.php";
+$modeloAcerca = new ModeloAcerca($conexion);
+$acerca = $modeloAcerca->obtenerAcerca();
+$logoAside = ($acerca && $acerca['logo']) ? $acerca['logo'] : 'logo-novacorp.jpg';
 ?>
 
 <!DOCTYPE html>
@@ -81,19 +89,15 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
                   <td>01-01-25</td>
                   <td>01-02-25</td>
                   <td>1</td>
-                  <td><button class="option-btn">Editar | Eliminar RFID</button></td>
+                  <td>
+                  <a href="<?php echo BASE_URL; ?>vistas/miembros.php?editar=<?php echo $miembro['id']; ?>" class="option-btn">Editar</a>
+                  <form method="POST" action="<?php echo BASE_URL; ?>controladores/controladorMiembros.php" style="display:inline;" onsubmit="return confirm('¿Está seguro que desea eliminar este miembro?');">
+                      <input type="hidden" name="id" value="<?php echo $miembro['id']; ?>">
+                      <input type="submit" name="btn-eliminar" class="option-btn" value="Eliminar" style="background:#e74c3c;">
+                    </form>
+                  </td>
                 </tr>
-                <tr>
-                  <td>2</td>
-                  <td>María</td>
-                  <td>Pérez</td>
-                  <td>222 2222</td>
-                  <td>Membresía premium</td>
-                  <td>05-01-25</td>
-                  <td>05-02-25</td>
-                  <td>5</td>
-                  <td><button class="option-btn">Editar | Eliminar RFID</button></td>
-                </tr>
+
               </tbody>
             </table>
           </div>
@@ -103,6 +107,14 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
         <section class="content content-form" id="registroMiembro" style="display:none;">
           <h2>Registro de Miembros</h2>
           <form class="registro-grid">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="id">Tarjeta RFID *</label>
+                <input type="number" id="id" name="id" placeholder="Tarjeta RFID" required>
+              </div>
+            </div>
+
             <div class="form-row">
               <div class="form-group">
                 <label for="membresia">Membresía *</label>
@@ -157,6 +169,7 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
                 <button type="submit" class="save-btn">Guardar</button>
               </div>
             </div>
+
           </form>
         </section>
       </main>
