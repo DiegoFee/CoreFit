@@ -1,25 +1,35 @@
 // PREVISUALIZAR LOGO
 const logoInput = document.getElementById('logo-input');
 const logoImg = document.getElementById('company-logo');
-const saveLogoBtn = document.getElementById('save-logo-btn');
-const deleteLogoBtn = document.getElementById('delete-logo-btn');
+const form = document.querySelector('.datos-empresa');
+const restaurarLogo = document.getElementById('restaurar-logo');
 
-logoInput.addEventListener('change', (e) => {
-  const file = e.target.files[0];
-  if(file){
-    const reader = new FileReader();
-    reader.onload = () => {
-      logoImg.src = reader.result;
-    };
-    reader.readAsDataURL(file);
-  }
-});
+// RUTA AL LOGO POR DEFECTO
+const defaultLogo = logoImg ? logoImg.dataset.default : '';
 
-saveLogoBtn.addEventListener('click', () => {
-  alert('Imagen guardada (simulado).');
-});
+if (form && logoImg) {
+  form.addEventListener('reset', (e) => {
+    setTimeout(() => {
+      // VACÍA TODOS LOS CAMPOS DE TEXTO
+      form.querySelectorAll('input[type="text"], input[type="email"]').forEach(input => input.value = '');
+      // CAMBIA EL LOGO AL DE NOVACORP
+      logoImg.src = defaultLogo;
+      if (logoInput) logoInput.value = '';
+      if (restaurarLogo) restaurarLogo.checked = false;
+    }, 0);
+  });
+}
 
-deleteLogoBtn.addEventListener('click', () => {
-  logoImg.src = '/public/images/logo-novacorp.jpg';
-  logoInput.value = '';
-});
+// PREVISUALIZACIÓN DE LA IMAGEN SELECCIONADA
+if (logoInput && logoImg) {
+  logoInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if(file){
+      const reader = new FileReader();
+      reader.onload = () => {
+        logoImg.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}

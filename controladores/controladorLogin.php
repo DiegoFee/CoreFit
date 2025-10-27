@@ -18,7 +18,7 @@ if (!empty($_POST["btn-ingresar"])) {
     $usuario = $_POST["usuario"];
     $contraseña = $_POST["contraseña"];
     // consulta de verificación en mysql
-    $sql = $conexion -> query("select * from usuarios where usuario='$usuario' and contraseña='$contraseña'");
+    $sql = $conexion -> query("select * from Usuarios where usuario='$usuario' and contraseña='$contraseña'");
     if ($datos = $sql -> fetch_object()) {
         $_SESSION['usuario'] = $usuario;
         header("location:" . BASE_URL . "vistas/inicio.php");

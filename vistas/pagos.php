@@ -1,7 +1,22 @@
 <?php
+// importes generales
 require __DIR__ . "/../config.php";
 require __DIR__ . "/../controladores/controladorLogin.php";
 $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
+
+// ajustes para que se muestre el logo personalizado
+require_once __DIR__ . "/../conexionMysql.php";
+require_once __DIR__ . "/../modelos/modeloAcerca.php";
+$modeloAcerca = new ModeloAcerca($conexion);
+$acerca = $modeloAcerca->obtenerAcerca();
+$logoAside = ($acerca && $acerca['logo']) ? $acerca['logo'] : 'logo-novacorp.jpg';
+
+// importes para el MVC
+require_once __DIR__ . "/../modelos/modeloPagos.php";
+require_once __DIR__ . "/../modelos/modeloMiembros.php";
+$modeloPagos = new modeloPagos($conexion);
+$modeloMiembros = new modeloMiembros($conexion);
+$miembrosConPagos = $modeloPagos->obtenerMiembrosConPagos();
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +35,7 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 
 <body>
   <div class="container">
+    <script>window.CoreFitBaseUrl = '<?php echo BASE_URL; ?>';</script>
     <!-- SIDEBAR (IMPORTADO DESDE MODULOS) -->
     <?php
       if ($usuario == "Administrador") {
@@ -80,36 +96,61 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 
               <!-- Ejemplo: filas con atributos data para poblar modal -->
               <tbody>
-                <tr data-id="1" data-nombre="Luis" data-apellido="Gómez" data-telefono="111 1111" data-membresia="Normal" data-precio="200" data-desde="2025-01-01" data-hasta="2025-01-31" data-actividad="Activo" data-estado="Al día" data-pago="Q200">
-                  <td>1</td>
-                  <td>Luis</td>
-                  <td>Gómez</td>
-                  <td>Normal</td>
-                  <td>01-01-25</td>
-                  <td>31-01-25</td>
-                  <td><span class="badge badge-active">Activo</span></td>
-                  <td><span class="badge badge-ok">Al día</span></td>
-                  <td class="td-actions">
-                    <button class="option-btn pagar-btn" title="Registrar pago"><i class="fa fa-credit-card"></i> Pagar</button>
-                    <button class="option-btn detalles-btn" title="Ver detalles"><i class="fa fa-eye"></i> Detalles</button>
-                  </td>
-                </tr>
-
-                <tr data-id="2" data-nombre="María" data-apellido="Pérez" data-telefono="222 2222" data-membresia="Premium" data-precio="350" data-desde="2025-01-05" data-hasta="2025-02-05" data-actividad="Inactivo" data-estado="Moroso" data-pago="Q0">
-                  <td>2</td>
-                  <td>María</td>
-                  <td>Pérez</td>
-                  <td>Premium</td>
-                  <td>05-01-25</td>
-                  <td>05-02-25</td>
-                  <td><span class="badge badge-inactive">Inactivo</span></td>
-                  <td><span class="badge badge-danger">Moroso</span></td>
-                  <td class="td-actions">
-                    <button class="option-btn pagar-btn" title="Registrar pago"><i class="fa fa-credit-card"></i> Pagar</button>
-                    <button class="option-btn detalles-btn" title="Ver detalles"><i class="fa fa-eye"></i> Detalles</button>
-                  </td>
-                </tr>
-
+                <?php if (!empty($miembrosConPagos)): ?>
+                  <?php foreach ($miembrosConPagos as $miembro): ?>
+                    <?php
+                      $fechaHasta = new DateTime($miembro['fecha_hasta']);
+                      $fechaActual = new DateTime();
+                      $esActivo = $fechaHasta >= $fechaActual;
+                      $estaAlDia = $miembro['total_pagado'] >= $miembro['precio_total'];
+                      $debe = $miembro['precio_total'] - $miembro['total_pagado'];
+                    ?>
+                    <tr data-id="<?php echo $miembro['id']; ?>" 
+                        data-nombre="<?php echo htmlspecialchars($miembro['nombre']); ?>" 
+                        data-apellido="<?php echo htmlspecialchars($miembro['apellido']); ?>" 
+                        data-telefono="<?php echo htmlspecialchars($miembro['telefono'] ?? 'No registrado'); ?>" 
+                        data-membresia="<?php echo htmlspecialchars($miembro['membresia_nombre']); ?>" 
+                        data-precio="<?php echo $miembro['precio_total']; ?>" 
+                        data-desde="<?php echo $miembro['fecha_desde']; ?>" 
+                        data-hasta="<?php echo $miembro['fecha_hasta']; ?>" 
+                        data-actividad="<?php echo $esActivo ? 'Activo' : 'Inactivo'; ?>" 
+                        data-estado="<?php echo $estaAlDia ? 'Al día' : 'Moroso'; ?>" 
+                        data-pago="<?php echo $miembro['total_pagado']; ?>"
+                        data-debe="<?php echo $debe; ?>"
+                        data-foto="<?php echo htmlspecialchars($miembro['foto'] ?? ''); ?>">
+                      <td><?php echo $miembro['id']; ?></td>
+                      <td><?php echo htmlspecialchars($miembro['nombre']); ?></td>
+                      <td><?php echo htmlspecialchars($miembro['apellido']); ?></td>
+                      <td><?php echo htmlspecialchars($miembro['membresia_nombre']); ?></td>
+                      <td><?php echo date('d-m-y', strtotime($miembro['fecha_desde'])); ?></td>
+                      <td><?php echo date('d-m-y', strtotime($miembro['fecha_hasta'])); ?></td>
+                      <td>
+                        <span class="badge <?php echo $esActivo ? 'badge-active' : 'badge-inactive'; ?>">
+                          <?php echo $esActivo ? 'Activo' : 'Inactivo'; ?>
+                        </span>
+                      </td>
+                      <td>
+                        <span class="badge <?php echo $estaAlDia ? 'badge-ok' : 'badge-danger'; ?>">
+                          <?php echo $estaAlDia ? 'Al día' : 'Moroso'; ?>
+                        </span>
+                      </td>
+                      <td class="td-actions">
+                        <button class="option-btn pagar-btn <?php echo $estaAlDia ? 'disabled' : ''; ?>" 
+                                title="Registrar pago" 
+                                <?php echo $estaAlDia ? 'disabled' : ''; ?>>
+                          <i class="fa fa-credit-card"></i> Pagar
+                        </button>
+                        <button class="option-btn detalles-btn" title="Ver detalles">
+                          <i class="fa fa-eye"></i> Detalles
+                        </button>
+                      </td>
+                    </tr>
+                  <?php endforeach; ?>
+                <?php else: ?>
+                  <tr>
+                    <td colspan="9" style="text-align:center;">No hay miembros registrados.</td>
+                  </tr>
+                <?php endif; ?>
               </tbody>
             </table>
           </div>
@@ -132,19 +173,25 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 
         <div class="data-section">
           <h3>Datos del pago</h3>
-          <form id="formPago" class="payment-form" autocomplete="off">
+          <form id="formPago" method="POST" action="<?php echo BASE_URL; ?>controladores/controladorPagos.php" class="payment-form" autocomplete="off">
+            <input type="hidden" id="miembroIdPago" name="miembro_id">
             <div class="form-row">
               <label>Membresía <input id="pagarMembresia" type="text" readonly></label>
               <label>Precio (Q) <input id="pagarPrecio" type="number" readonly></label>
             </div>
             <div class="form-row">
               <label>Cantidad que debe <input id="pagarDebe" type="number" readonly></label>
-              <label>Cantidad a pagar <input id="pagarCantidad" type="number" min="0" step="0.01" required></label>
+              <label>Cantidad a pagar <input id="pagarCantidad" name="monto" type="number" min="0" step="0.01" required></label>
+            </div>
+            <div class="form-row">
+              <!-- Se utiliza siempre efectivo; lo enviamos oculto desde el formulario -->
+              <input type="hidden" name="metodo_pago" value="efectivo">
+              <input type="hidden" name="observaciones" value="">
             </div>
 
             <div class="form-actions">
               <button type="button" class="btn-secondary modal-close">Atrás</button>
-              <button type="submit" class="save-btn"><i class="fa fa-save"></i> Guardar pago</button>
+              <input type="submit" name="btn-guardar-pago" class="save-btn" value="Guardar pago">
             </div>
           </form>
         </div>
@@ -163,7 +210,7 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
         <div id="miembroDatosDetalles" class="member-data"></div>
         <div class="form-actions">
           <button class="option-btn" id="verFotoBtn"><i class="fa fa-image"></i> Ver foto</button>
-          <button class="option-btn" id="imprimirRegistroBtn"><i class="fa fa-print"></i> Imprimir registro</button>
+          <button class="option-btn" id="imprimirRegistroBtn"><i class="fa fa-print"></i> Imprimir registro de actividad (PDF)</button>
         </div>
       </div>
 
@@ -193,7 +240,7 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
         </div>
 
         <div class="form-actions">
-          <button id="imprimirHistoriaBtn" class="save-btn"><i class="fa fa-file-pdf"></i> Imprimir historia de pagos (PDF)</button>
+          <button id="imprimirHistoriaBtn" class="save-btn"><i class="fa fa-print"></i> Imprimir historial de pagos (PDF)</button>
         </div>
       </div>
     </div>

@@ -1,7 +1,20 @@
 <?php
+// importes generales
 require __DIR__ . "/../config.php";
 require __DIR__ . "/../controladores/controladorLogin.php";
 $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
+
+// ajustes para que se muestre el logo personalizado
+require_once __DIR__ . "/../conexionMysql.php";
+require_once __DIR__ . "/../modelos/modeloAcerca.php";
+$modeloAcerca = new ModeloAcerca($conexion);
+$acerca = $modeloAcerca->obtenerAcerca();
+$logoAside = ($acerca && $acerca['logo']) ? $acerca['logo'] : 'logo-novacorp.jpg';
+
+// importes para el MVC
+require_once __DIR__ . "/../modelos/modeloInicio.php";
+$modeloInicio = new modeloInicio($conexion);
+$estadisticas = $modeloInicio->obtenerEstadisticas();
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +32,7 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 
 <body>
   <div class="container">
+    <script>window.CoreFitBaseUrl = '<?php echo BASE_URL; ?>';</script>
     <!-- SIDEBAR (IMPORTADO DESDE MODULOS) -->
     <?php
       if ($usuario == "Administrador") {
@@ -55,41 +69,49 @@ $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
             <div class="card">
               <div class="card-icon"><i class="fa fa-users"></i></div>
               <div class="card-title">Cantidad de miembros</div>
-              <div class="card-value">0</div>
-              <div class="card-sub">Actualizado hace 1 min</div>
+              <div class="card-value"><?php echo $estadisticas['total_miembros']; ?></div>
+              <div class="card-sub">Actualizado hace <span id="tiempoActualizacion">1</span> min</div>
             </div>
             <div class="card">
               <div class="card-icon"><i class="fa fa-calendar-check"></i></div>
               <div class="card-title">Asistencias del día</div>
-              <div class="card-value">0</div>
-              <div class="card-sub">Actualizado hace 1 min</div>
+              <div class="card-value"><?php echo $estadisticas['asistencias_hoy']; ?></div>
+              <div class="card-sub">Actualizado hace <span id="tiempoActualizacion2">1</span> min</div>
             </div>
             <div class="card">
               <div class="card-icon"><i class="fa fa-dumbbell"></i></div>
-              <div class="card-title">Cantidad de membresías</div>
-              <div class="card-value">0</div>
-              <div class="card-sub">Actualizado hace 1 min</div>
+              <div class="card-title">Miembros activos</div>
+              <div class="card-value"><?php echo $estadisticas['miembros_activos']; ?></div>
+              <div class="card-sub">Actualizado hace <span id="tiempoActualizacion3">1</span> min</div>
             </div>
             <div class="card">
               <div class="card-icon"><i class="fa fa-dollar-sign"></i></div>
               <div class="card-title">Pagos pendientes</div>
-              <div class="card-value">0</div>
-              <div class="card-sub">Actualizado hace 1 min</div>
+              <div class="card-value"><?php echo $estadisticas['miembros_morosos']; ?></div>
+              <div class="card-sub">Actualizado hace <span id="tiempoActualizacion4">1</span> min</div>
             </div>
           </div>
 
           <!-- REGISTRO DE ASISTENCIA -->
           <div class="attendance">
             <h2>Registro de asistencia</h2>
-            <form class="attendance-form">
-              <input type="text" placeholder="Ingrese ID manualmente o por tarjeta">
+            <form class="attendance-form" id="formAsistencia">
+              <input type="text" id="rfid_input" name="rfid_input" placeholder="Ingrese ID manualmente o por tarjeta" required>
               <button type="submit" class="confirm-btn">Confirmar asistencia</button>
             </form>
+            
+            <!-- Área para mostrar mensajes -->
+            <div id="mensajeAsistencia" class="mensaje-asistencia" style="display: none;">
+              <div id="contenidoMensaje"></div>
+            </div>
           </div>
 
         </section>
       </main>
     </div>
   </div>
+  
+  <!-- JS PARA CONTROL DE ASISTENCIA Y ACTUALIZACIÓN DINÁMICA -->
+  <script src="<?php echo BASE_URL;?>vistas/public/scripts/inicio.js"></script>
 </body>
 </html>

@@ -33,7 +33,7 @@ require __DIR__ . "/../controladores/controladorLogin.php";
         <label for="contraseña">Contraseña</label>
         <input name="contraseña" id="contraseña" type="password" placeholder="Contraseña" required>
 
-        <input name="btn-ingresar" id="btn-ingresar" type="submit" value="Acceder">
+        <input type="submit" name="btn-ingresar" id="btn-ingresar" value="Acceder">
         
         <?php
           if (!empty($mensaje)) {

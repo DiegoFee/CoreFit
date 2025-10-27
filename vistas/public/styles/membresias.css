@@ -214,6 +214,69 @@ CONTENIDO
   background: #9ACC00;
 }
 
+/* despliegue de formulario de edición de membresía  __________________________________ */
+.edit-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  border: 1.5px solid #E0E0E0;
+  font-size: 1rem;
+  background: #f9fafb;
+  color: #120078;
+  outline: none;
+  transition: border 0.2s;
+}
+.edit-input:focus {
+  border: 2px solid #309AFF;
+}
+.edit-file-input {
+  margin-top: 8px;
+  width: 100%;
+  font-size: 0.95rem;
+}
+.edit-btn-group {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-btn,
+.cancel-btn {
+  flex: 1 1 0;
+  min-width: 80px;
+  max-width: 120px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  font-size: 1rem;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: inline-block;
+}
+.edit-btn {
+  background: var(--lime);
+  color: var(--paua);
+}
+.edit-btn:hover {
+  background: var(--dodgerblue);
+  color: var(--blanco);
+}
+.cancel-btn {
+  background: #ccc;
+  color: #333;
+  text-decoration: none;
+}
+.cancel-btn:hover {
+  background: #b0b0b0;
+  color: #222;
+}
+
 /* ==============================
 DISEÑO RESPONSIVE
 ============================== */
