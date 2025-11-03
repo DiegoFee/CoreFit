@@ -4,14 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnAtras = document.getElementById("btnAtras");
   const membresiasLista = document.getElementById("membresiasLista");
 
-  // MOSTRAR FORMULARIO DE REGISTRO Y OCULTAR LISTA
+  // Mostrar formulario de registro y ocultar listas
   btnRegistrar.addEventListener("click", () => {
     membresiasLista.style.display = "none";
     registroMembresia.style.display = "block";
     window.scrollTo({ top: registroMembresia.offsetTop, behavior: "smooth" });
   });
 
-  // VOLVER A LA LISTA DE MIEMBROS
+  // Volver a la lista de miembros
   btnAtras.addEventListener("click", () => {
     registroMembresia.style.display = "none";
     membresiasLista.style.display = "block";

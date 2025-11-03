@@ -17,7 +17,7 @@ function subirRutinas($file) {
   return null;
 }
 
-// crear nueva membresía
+// Crear nueva membresía
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (isset($_POST['btn-guardar'])) {
     $datos = [
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
   }
 
-  // editar membresía existente por id
+  // Editar membresía existente por id
   if (isset($_POST['btn-editar'])) {
     $id = intval($_POST['id']);
     $membresiaActual = $modelo->obtenerMembresiaPorId($id);
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
   }
 
-  // eliminar membresía existente por id
+  // Eliminar membresía existente por id
   if (isset($_POST['btn-eliminar'])) {
     $id = intval($_POST['id']);
     $membresiaActual = $modelo->obtenerMembresiaPorId($id);

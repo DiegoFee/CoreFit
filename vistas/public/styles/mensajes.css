@@ -60,42 +60,145 @@ CONTENIDO
 
 /* contenedor de mensajes ______________________________________________________________ */
 .mensajes-container {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: var(--space-md);
 }
+
 .mensaje-card {
   background: var(--white);
   border: 2px solid var(--dodgerblue);
   border-radius: var(--radius);
-  padding: var(--space-sm);
+  padding: var(--space-md);
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: var(--space-sm);
   box-shadow: var(--shadow);
-  width: calc(33% - 10px);
-  min-width: 230px;
-  max-height: 250px;
-  overflow-y: auto;
+  height: fit-content;
+  min-height: 220px; /* uniform card height */
 }
-.mensaje-card h3 {
+
+.mensaje-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xs);
+}
+
+.mensaje-header h3 {
   font-size: 1.1rem;
   color: var(--paua);
+  margin: 0;
 }
+
 .mensaje-card textarea {
   resize: none;
-  padding: var(--space-xs);
+  padding: var(--space-sm);
   border: 2px solid var(--dodgerblue);
   border-radius: var(--radius);
-  min-height: 50px;
   font-size: 0.95rem;
+  width: 100%;
+  font-family: inherit;
+  height: 110px; /* fixed height so all cards match */
 }
-.mensaje-card input[type="number"] {
-  width: 70px;
+
+.days-input {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}
+
+.days-input input[type="number"] {
+  width: 60px;
   padding: var(--space-xs);
   border: 2px solid var(--dodgerblue);
   border-radius: var(--radius);
+  text-align: center;
+}
+
+.days-input span {
+  color: var(--gris-texto);
+  font-size: 0.9rem;
+}
+
+/* Switch toggle _________________________________________________________________ */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--paua);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Actions container ______________________________________________________________ */
+.actions-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-sm);
+}
+
+.save-btn {
+  background: var(--paua);
+  color: var(--white);
+  border: none;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all var(--transition);
+}
+
+.save-btn:hover {
+  background: var(--lime);
+  color: var(--paua);
+}
+
+/* Fixed position save button (bottom-right) */
+.save-btn.fixed {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2000;
+  box-shadow: var(--shadow);
 }
 
 /* botones de contenedor de mensajes __________________________________________________ */

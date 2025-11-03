@@ -1,10 +1,10 @@
 <?php
-// importes generales
+// Importes generales
 require __DIR__ . "/../config.php";
 require __DIR__ . "/../controladores/controladorLogin.php";
 $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 
-// ajustes para que se muestre el logo personalizado
+// Ajustes para que se muestre el logo personalizado
 require_once __DIR__ . "/../modelos/modeloAcerca.php";
 require_once __DIR__ . "/../conexionMysql.php";
 $modelo = new ModeloAcerca($conexion);
@@ -86,7 +86,7 @@ $logo = ($acerca && $acerca['logo']) ? $acerca['logo'] : 'logo-novacorp.jpg';
             <input type="text" name="nombre" value="<?php echo $acerca ? htmlspecialchars($acerca['nombre']) : ''; ?>" placeholder="Nombre de la empresa cliente">
 
             <label>Teléfono de la empresa:</label>
-            <input type="text" name="contacto" value="<?php echo $acerca ? htmlspecialchars($acerca['contacto']) : ''; ?>" placeholder="Teléfono de la empresa cliente">
+            <input type="text" name="contacto" maxlength="8" value="<?php echo $acerca ? htmlspecialchars($acerca['contacto']) : ''; ?>" placeholder="Teléfono de la empresa cliente">
 
             <label>Dueño de la empresa:</label>
             <input type="text" name="dueno" value="<?php echo $acerca ? htmlspecialchars($acerca['dueno']) : ''; ?>" placeholder="Nombre del dueño">

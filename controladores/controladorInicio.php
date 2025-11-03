@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if (!$estaAlDia) {
         $mensaje .= " Recuerde que tiene pagos pendientes.";
       }
-      // Obtener estadísticas actualizadas (incluye asistencias del día)
+      // Obtener estadísticas actualizadas (incluyendo asistencias del día)
       $estadisticasActualizadas = $modeloInicio->obtenerEstadisticas();
       echo json_encode([
         'success' => true,

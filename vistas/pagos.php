@@ -1,17 +1,17 @@
 <?php
-// importes generales
+// Importes generales
 require __DIR__ . "/../config.php";
 require __DIR__ . "/../controladores/controladorLogin.php";
 $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 
-// ajustes para que se muestre el logo personalizado
+// Ajustes para que se muestre el logo personalizado
 require_once __DIR__ . "/../conexionMysql.php";
 require_once __DIR__ . "/../modelos/modeloAcerca.php";
 $modeloAcerca = new ModeloAcerca($conexion);
 $acerca = $modeloAcerca->obtenerAcerca();
 $logoAside = ($acerca && $acerca['logo']) ? $acerca['logo'] : 'logo-novacorp.jpg';
 
-// importes para el MVC
+// Importes para el MVC
 require_once __DIR__ . "/../modelos/modeloPagos.php";
 require_once __DIR__ . "/../modelos/modeloMiembros.php";
 $modeloPagos = new modeloPagos($conexion);
@@ -94,7 +94,7 @@ $miembrosConPagos = $modeloPagos->obtenerMiembrosConPagos();
                 </tr>
               </thead>
 
-              <!-- Ejemplo: filas con atributos data para poblar modal -->
+              <!-- Filas con atributos data para llenar el modal -->
               <tbody>
                 <?php if (!empty($miembrosConPagos)): ?>
                   <?php foreach ($miembrosConPagos as $miembro): ?>
@@ -184,7 +184,7 @@ $miembrosConPagos = $modeloPagos->obtenerMiembrosConPagos();
               <label>Cantidad a pagar <input id="pagarCantidad" name="monto" type="number" min="0" step="0.01" required></label>
             </div>
             <div class="form-row">
-              <!-- Se utiliza siempre efectivo; lo enviamos oculto desde el formulario -->
+              <!-- Por si se quieren incluir pagos en otros métodos, por ahora solo efectivo -->
               <input type="hidden" name="metodo_pago" value="efectivo">
               <input type="hidden" name="observaciones" value="">
             </div>
@@ -225,7 +225,7 @@ $miembrosConPagos = $modeloPagos->obtenerMiembrosConPagos();
           <input id="searchTrans" class="search-bar" placeholder="Buscar transacción...">
         </div>
 
-        <!-- tabla de transacciones que complementa a los ejemplos estáticos -->
+        <!-- Tabla de transacciones -->
         <div class="table-responsive">
           <table id="tablaTrans" class="members-table">
             <thead>
@@ -252,7 +252,7 @@ $miembrosConPagos = $modeloPagos->obtenerMiembrosConPagos();
       <button class="close-btn modal-close" aria-label="Cerrar">&times;</button>
       <div class="data-section" style="align-items:center;">
         <h3>Foto del miembro</h3>
-        <img id="fotoImagen" src="/public/icons/usuario.ico" alt="Foto" style="max-width:320px;border-radius:8px;">
+        <img id="fotoImagen" src="<?php echo BASE_URL; ?>vistas/public/icons/usuario.ico" alt="Foto" style="max-width:320px;border-radius:8px;">
       </div>
     </div>
   </div>

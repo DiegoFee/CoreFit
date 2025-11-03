@@ -1,17 +1,17 @@
 <?php
-// importes generales
+// Importes generales
 require __DIR__ . "/../config.php";
 require __DIR__ . "/../controladores/controladorLogin.php";
 $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 
-// ajustes para que se muestre el logo personalizado
+// Ajustes para que se muestre el logo personalizado
 require_once __DIR__ . "/../conexionMysql.php";
 require_once __DIR__ . "/../modelos/modeloAcerca.php";
 $modeloAcerca = new ModeloAcerca($conexion);
 $acerca = $modeloAcerca->obtenerAcerca();
 $logoAside = ($acerca && $acerca['logo']) ? $acerca['logo'] : 'logo-novacorp.jpg';
 
-// importes para el MVC
+// Importes para el MVC
 require_once __DIR__ . "/../modelos/modeloMiembros.php";
 require_once __DIR__ . "/../modelos/modeloMembresias.php";
 $modeloMiembros = new modeloMiembros($conexion);
@@ -110,7 +110,7 @@ if ($editando) {
                       <tr>
                         <form method="POST" action="<?php echo BASE_URL; ?>controladores/controladorMiembros.php" enctype="multipart/form-data">
                           <td>
-                     <input type="text" name="tarjeta_rfid" value="<?php echo htmlspecialchars($miembro['tarjeta_rfid']); ?>" required class="edit-input">
+                            <input type="text" name="tarjeta_rfid" value="<?php echo htmlspecialchars($miembro['tarjeta_rfid']); ?>" required class="edit-input">
                             <input type="hidden" name="id" value="<?php echo htmlspecialchars($miembro['id']); ?>">
                           </td>
                           <td>
@@ -255,7 +255,7 @@ if ($editando) {
             <div class="form-row">
               <div class="form-group">
                 <label for="telefono">Teléfono</label>
-                <input type="tel" id="telefono" name="telefono" placeholder="Teléfono">
+                <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" maxlength="12">
               </div>
               <div class="form-group">
                 <label for="foto">Foto</label>

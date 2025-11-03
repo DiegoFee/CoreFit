@@ -15,7 +15,7 @@ function subirLogo($file) {
   return null;
 }
 
-// manejo de los campos de texto
+// Manejo de los campos de texto
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $accion = $_POST['accion'] ?? '';
   $datos = [
@@ -26,12 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     'logo' => null
   ];
 
-  // manejo de logo
+  // Manejo de logo
   $acercaActual = $modelo->obtenerAcerca();
   $restaurarLogo = isset($_POST['restaurar_logo']);
 
   if ($restaurarLogo) {
-    // borra el logo personalizado de las carpetas del sistema
+    // Deja de apuntar al logo personalizado de las carpetas del sistema (el logo aún existe)
     if ($acercaActual && $acercaActual['logo'] && $acercaActual['logo'] !== 'logo-novacorp.jpg') {
       $rutaLogo = __DIR__ . '/../vistas/public/files/logos/' . $acercaActual['logo'];
       if (file_exists($rutaLogo)) {

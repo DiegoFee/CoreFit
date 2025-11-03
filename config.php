@@ -11,4 +11,9 @@ if ($isProduction) {
 
 define('ROOT_PATH', __DIR__);
 
+// variables de twilio para el envío de sms
+define('TWILIO_SID', 'ACcdaa72871411c299d3d3fd5fe9d92296');
+define('TWILIO_AUTH_TOKEN', 'f3d81b158af6cbf31104b2376be62018');
+define('TWILIO_FROM', '+14359992317');
+
 ?>

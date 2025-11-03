@@ -1,17 +1,17 @@
 <?php
-// importes generales
+// Importes generales
 require __DIR__ . "/../config.php";
 require __DIR__ . "/../controladores/controladorLogin.php";
 $usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 
-// ajustes para que se muestre el logo personalizado
+// Ajustes para que se muestre el logo personalizado
 require_once __DIR__ . "/../conexionMysql.php";
 require_once __DIR__ . "/../modelos/modeloAcerca.php";
 $modeloAcerca = new ModeloAcerca($conexion);
 $acerca = $modeloAcerca->obtenerAcerca();
 $logoAside = ($acerca && $acerca['logo']) ? $acerca['logo'] : 'logo-novacorp.jpg';
 
-// importes para el MVC
+// Importes para el MVC
 require_once __DIR__ . "/../modelos/modeloInicio.php";
 $modeloInicio = new modeloInicio($conexion);
 $estadisticas = $modeloInicio->obtenerEstadisticas();

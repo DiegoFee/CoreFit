@@ -9,14 +9,14 @@ class modeloMembresias {
     $this -> conexion = $conexion;
   }
 
-  // funciones directas a la bd
+  // Funciones directas a la bd
   public function crearMembresia($datos) {
     $stmt = $this->conexion->prepare("INSERT INTO Membresias (nombre, meses, modalidad, precio, rutinas) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("sisis", $datos['nombre'], $datos['meses'], $datos['modalidad'], $datos['precio'], $datos['rutinas']);
     return $stmt->execute();
   }
 
-  public function obtenerMembresia() { // para mostrar los datos en unalista
+  public function obtenerMembresia() { // Para mostrar los datos en una lista
     $sql = "SELECT * FROM Membresias";
     $resultado = $this->conexion->query($sql);
     $membresias = [];
@@ -26,7 +26,7 @@ class modeloMembresias {
     return $membresias;
   }
 
-  public function obtenerMembresiaPorId($id) { // para editar datos específicos
+  public function obtenerMembresiaPorId($id) { // Para editar datos específicos
     $stmt = $this->conexion->prepare("SELECT * FROM Membresias WHERE id=?");
     $stmt->bind_param("i", $id);
     $stmt->execute();

@@ -34,20 +34,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Event delegation for pagar and detalles buttons (keeps handlers after DOM changes)
+  // Configuración de los botones Pagar y Detalles
   const tablaPagos = document.getElementById('tablaPagos');
-  let _asistenciaChart = null; // keep chart reference so we can destroy it when redrawn
+  let _asistenciaChart = null; // Mantiene la referencia al chart para reescribirlo después
 
   function crearGraficoAsistenciaConDatos(datos) {
     const ctx = document.getElementById('chartPagos');
     if (!ctx) return;
 
-    // Destroy previous chart if exists
+    // Destruye los gráficos anteriores si existen
     if (_asistenciaChart && typeof _asistenciaChart.destroy === 'function') {
       _asistenciaChart.destroy();
       _asistenciaChart = null;
     }
 
+    // Estilos del gráfico
     const chartData = {
       labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
       datasets: [{
@@ -71,8 +72,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Apartado para traer la información actualizada del gráfico desde el servidor, si los datos fallan se usan datos default
   async function crearGraficoAsistenciaForMember(miembroId) {
-    // Try to fetch real data from server. If endpoint isn't available or fails, fall back to simulated data.
     const fallback = [0,0,0,0,0,0,0];
     try {
       const url = `${window.CoreFitBaseUrl}controladores/controladorPagos.php?accion=asistencias_por_semana&id=${encodeURIComponent(miembroId)}`;
@@ -82,15 +83,15 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       const json = await resp.json();
-      // Expecting { data: [lun, mar, mie, jue, vie, sab, dom] }
+      // Espera { data: [lun, mar, mie, jue, vie, sab, dom] }
       if (json && Array.isArray(json.data) && json.data.length === 7) {
         crearGraficoAsistenciaConDatos(json.data.map(v => Number(v) || 0));
       } else {
-        // try to use json.asistencias if present
+        // Usa json.asistencias si está disponible
         if (json && Array.isArray(json.asistencias) && json.asistencias.length === 7) {
           crearGraficoAsistenciaConDatos(json.asistencias.map(v => Number(v) || 0));
         } else {
-          // fallback simulated data
+          // Vuelta con datos simulados 
           crearGraficoAsistenciaConDatos([5,3,7,4,6,2,1]);
         }
       }
@@ -196,17 +197,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-
   // Función para crear gráfico de asistencia
   function crearGraficoAsistencia() {
     const ctx = document.getElementById('chartPagos');
     if (ctx) {
-      // Datos simulados de asistencia (en un sistema real vendrían de la base de datos)
+      // Datos simulados de asistencia (default)
       const datosAsistencia = {
         labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
         datasets: [{
           label: 'Asistencias por día de la semana',
-          data: [5, 3, 7, 4, 6, 2, 1], // Datos simulados
+          data: [5, 3, 7, 4, 6, 2, 1],
           backgroundColor: 'rgba(54, 162, 235, 0.2)',
           borderColor: 'rgba(54, 162, 235, 1)',
           borderWidth: 1
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const fotoImagen = document.getElementById('fotoImagen');
       if (miembroActual && miembroActual.foto && miembroActual.foto !== '' && miembroActual.foto !== '0' && miembroActual.foto !== null) {
         const fotoUrl = `${window.CoreFitBaseUrl}vistas/public/files/miembros/${miembroActual.foto}`;
-        // Verificar si la imagen existe
+        // Verificar si la imagen existe, sino muestra la imagen del ícono de administrador
         fetch(fotoUrl)
           .then(response => {
             if (response.ok) {

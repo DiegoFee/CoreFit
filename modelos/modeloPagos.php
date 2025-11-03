@@ -74,7 +74,7 @@ class modeloPagos {
   }
 
   public function obtenerAsistenciasPorSemana($miembroId) {
-    // Query para contar asistencias agrupadas por día de la semana (0=Domingo, 1=Lunes, ..., 6=Sábado)
+    // Query para contar asistencias agrupadas por día de la semana (0=Domingo, 1=Lunes ... 6=Sábado)
     $sql = "SELECT 
               WEEKDAY(fecha_asistencia) as dia_semana, 
               COUNT(*) as total_asistencias
@@ -88,15 +88,13 @@ class modeloPagos {
     $stmt->execute();
     $resultado = $stmt->get_result();
     
-    // Inicializar array con ceros (Lun=0, Mar=1, ..., Dom=6)
+    // Inicializa el array con ceros (Lun=0)
     $asistencias = array_fill(0, 7, 0);
     
     // Llenar los días que tienen asistencias
     while ($fila = $resultado->fetch_assoc()) {
       $dia = $fila['dia_semana'];
-      // MySQL WEEKDAY() retorna 0=Lunes, ..., 6=Domingo
-      // Necesitamos ajustar el índice para que 0=Lunes, 6=Domingo
-      $indice = $dia == 6 ? 0 : $dia + 1; // Mover domingo al inicio
+      $indice = $dia == 6 ? 0 : $dia + 1; // Mueve domingo al inicio
       $asistencias[$indice] = (int)$fila['total_asistencias'];
     }
     

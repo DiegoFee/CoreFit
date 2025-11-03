@@ -78,12 +78,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'observaciones' => 'Pago inicial al registrar miembro'
           ];
           $modeloPagos->crearPago($pagoData);
-          // actualizar campo pagado en Miembros
+          // Actualizar campo pagado en Miembros
           $modeloPagos->actualizarPagadoMiembro($miembroId, floatval($datos['pagado']));
         }
         $_SESSION['success'] = "Miembro registrado exitosamente";
       } else {
-        // Si la inserción falló por clave duplicada (tarjeta_rfid UNIQUE), informar que la tarjeta ya está en uso
+        // Si la inserción falló por clave duplicada de la tarjeta rfid informa que la tarjeta ya está en uso
         if ($conexion->errno == 1062) {
           $_SESSION['error'] = "La tarjeta RFID ya está en uso. Por favor use otra tarjeta.";
         } else {

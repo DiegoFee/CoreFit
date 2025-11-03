@@ -9,12 +9,14 @@ class modeloMiembros {
     $this -> conexion = $conexion;
   }
 
+  // Funciones directas a la bd
   public function crearMiembro($datos) {
     $stmt = $this->conexion->prepare("INSERT INTO Miembros (tarjeta_rfid, nombre, apellido, telefono, foto, membresia_id, fecha_desde, fecha_hasta, precio_total, pagado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("sssssissdd", $datos['tarjeta_rfid'], $datos['nombre'], $datos['apellido'], $datos['telefono'], $datos['foto'], $datos['membresia_id'], $datos['fecha_desde'], $datos['fecha_hasta'], $datos['precio_total'], $datos['pagado']);
     return $stmt->execute();
   }
 
+  // Obtener todos los miembros
   public function obtenerMiembros() {
     $sql = "SELECT m.*, mem.nombre as membresia_nombre, mem.meses, mem.modalidad, mem.precio as membresia_precio 
             FROM Miembros m 
@@ -28,6 +30,7 @@ class modeloMiembros {
     return $miembros;
   }
 
+  // Obtener un miembro por su id
   public function obtenerMiembroPorId($id) {
     $stmt = $this->conexion->prepare("SELECT m.*, mem.nombre as membresia_nombre, mem.meses, mem.modalidad, mem.precio as membresia_precio 
                                       FROM Miembros m 
@@ -50,6 +53,7 @@ class modeloMiembros {
     return $resultado->fetch_assoc();
   }
 
+  // Opciones CRUD para hacer con el miembro ya seleccionado
   public function actualizarMiembro($datos) {
     $stmt = $this->conexion->prepare("UPDATE Miembros SET tarjeta_rfid=?, nombre=?, apellido=?, telefono=?, foto=?, membresia_id=?, fecha_desde=?, fecha_hasta=?, precio_total=?, pagado=? WHERE id=?");
     $stmt->bind_param("ssssssissdi", $datos['tarjeta_rfid'], $datos['nombre'], $datos['apellido'], $datos['telefono'], $datos['foto'], $datos['membresia_id'], $datos['fecha_desde'], $datos['fecha_hasta'], $datos['precio_total'], $datos['pagado'], $datos['id']);
@@ -76,6 +80,7 @@ class modeloMiembros {
     return $fila['count'] > 0;
   }
 
+  // Obtener estadisticas de los miembros
   public function obtenerEstadisticas() {
     $sql = "SELECT 
               COUNT(*) as total_miembros,

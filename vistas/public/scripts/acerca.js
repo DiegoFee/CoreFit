@@ -1,18 +1,17 @@
-// PREVISUALIZAR LOGO
+// Previsualizar logo
 const logoInput = document.getElementById('logo-input');
 const logoImg = document.getElementById('company-logo');
 const form = document.querySelector('.datos-empresa');
 const restaurarLogo = document.getElementById('restaurar-logo');
 
-// RUTA AL LOGO POR DEFECTO
+// Ruta al logo por defecto (logo-novacorp.jpg)
 const defaultLogo = logoImg ? logoImg.dataset.default : '';
 
+// Restablecer los campos a default
 if (form && logoImg) {
   form.addEventListener('reset', (e) => {
     setTimeout(() => {
-      // VACÍA TODOS LOS CAMPOS DE TEXTO
       form.querySelectorAll('input[type="text"], input[type="email"]').forEach(input => input.value = '');
-      // CAMBIA EL LOGO AL DE NOVACORP
       logoImg.src = defaultLogo;
       if (logoInput) logoInput.value = '';
       if (restaurarLogo) restaurarLogo.checked = false;
@@ -20,7 +19,7 @@ if (form && logoImg) {
   });
 }
 
-// PREVISUALIZACIÓN DE LA IMAGEN SELECCIONADA
+// Previsualización de la imagen seleccionada
 if (logoInput && logoImg) {
   logoInput.addEventListener('change', (e) => {
     const file = e.target.files[0];

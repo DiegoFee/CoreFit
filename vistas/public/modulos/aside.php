@@ -7,7 +7,7 @@
         <a href="<?php echo BASE_URL;?>vistas/miembros.php" target="_self" class="menu-item"><i class="fa fa-users"></i> <span>Miembros</span></a>
         <a href="<?php echo BASE_URL;?>vistas/pagos.php" target="_self" class="menu-item"><i class="fa fa-dollar-sign"></i> <span>Pagos</span></a>
         <a href="<?php echo BASE_URL;?>vistas/membresias.php" class="menu-item"><i target="_self" class="fa fa-dumbbell"></i> <span>Membresías</span></a>
-        <a href="<?php echo BASE_URL;?>vistas/whatsapp.php" class="menu-item"><i target="_self" class="fa fa-comment-dots"></i> <span>WhatsApp</span></a>
+        <a href="<?php echo BASE_URL;?>vistas/mensajes.php" class="menu-item"><i target="_self" class="fa fa-comment-dots"></i> <span>Mensajes</span></a>
         <a href="<?php echo BASE_URL;?>vistas/acerca.php" class="menu-item"><i target="_self" class="fa fa-info-circle"></i> <span>Acerca de</span></a>
       </nav>
 

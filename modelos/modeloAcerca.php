@@ -9,7 +9,7 @@ class modeloAcerca {
     $this -> conexion = $conexion;
   }
 
-  // funciones directas a la bd
+  // Funciones directas a la bd
   public function obtenerAcerca() {
     $sql = "SELECT * FROM Acerca LIMIT 1";
     $resultado = $this->conexion->query($sql);

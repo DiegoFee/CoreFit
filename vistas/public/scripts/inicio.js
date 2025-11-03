@@ -1,4 +1,4 @@
-// Clean, fixed inicio.js: manejo de asistencia y actualizaciones en dashboard
+// Manejo de asistencia y actualizaciones en dashboard
 document.addEventListener('DOMContentLoaded', function() {
   const formAsistencia = document.getElementById('formAsistencia');
   const rfidInput = document.getElementById('rfid_input');
@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     tiempoElements.forEach(el => { if (el) el.textContent = minutosTranscurridos; });
   }
 
+  // Estadistica GET para obtener los datos del backend a los contenedores
   function actualizarEstadisticas() {
     fetch(`${window.CoreFitBaseUrl}controladores/controladorInicio.php?ajax=1&_=${Date.now()}`, { method: 'GET', headers: { 'Content-Type': 'application/json' } })
     .then(r => r.json())
@@ -53,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       mostrarMensaje('Procesando asistencia...', 'loading');
 
+      // Backend POST para enviar los datos de la tarjeta rfid
       fetch(`${window.CoreFitBaseUrl}controladores/controladorInicio.php`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -75,7 +77,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         mostrarMensaje(mensaje, tipo);
         if (rfidInput) { rfidInput.value = ''; rfidInput.focus(); }
-        // If backend returned updated statistics, use them. Otherwise, optimistically increment.
+
+        // Si el backend regresa las estadísticas actualizadas las muestra, sino deja por defecto
         try {
           const cards = document.querySelectorAll('.card-value');
           if (data && data.estadisticas && typeof data.estadisticas.asistencias_hoy !== 'undefined') {
@@ -86,8 +89,8 @@ document.addEventListener('DOMContentLoaded', function() {
               cards[1].textContent = isNaN(cur) ? '1' : String(cur + 1);
             }
           }
-        } catch (e) { /* ignore JS update errors */ }
-        // Refresh full stats shortly after to sync with server
+        } catch (e) { /* ignore errores de js */ }
+        // Refresca el área de estadísticas cada que se recarga la página (conexión al servidor)
         setTimeout(actualizarEstadisticas, 800);
       })
       .catch(err => { console.error('Error:', err); mostrarMensaje('Error al procesar la solicitud', 'error'); });

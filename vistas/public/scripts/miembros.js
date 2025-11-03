@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const fechaDesdeInput = document.getElementById('fecha_desde');
   const fechaHastaInput = document.getElementById('fecha_hasta');
 
-  // Configurar fecha actual por defecto
+  // Seteo de la fecha actual por defecto
   const hoy = new Date().toISOString().split('T')[0];
   fechaDesdeInput.value = hoy;
 
-  // Mostrar formulario de registro
+  // Para mostrar el formulario de registro
   btnRegistrar.addEventListener('click', function() {
     miembrosLista.style.display = 'none';
     registroMiembro.style.display = 'block';
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Búsqueda en tiempo real
+  // Búsqueda en tiempo real para el campo de buscar miembro
   const searchBar = document.querySelector('.search-bar');
   if (searchBar) {
     searchBar.addEventListener('input', function() {

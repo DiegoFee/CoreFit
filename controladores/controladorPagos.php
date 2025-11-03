@@ -8,7 +8,7 @@ require_once __DIR__ . "/../modelos/modeloMiembros.php";
 $modeloPagos = new modeloPagos($conexion);
 $modeloMiembros = new modeloMiembros($conexion);
 
-// Handle GET para obtener asistencias por semana
+// Manejador GET para obtener asistencias por semana
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['accion']) && $_GET['accion'] === 'asistencias_por_semana') {
   header('Content-Type: application/json');
   if (!isset($_GET['id'])) {

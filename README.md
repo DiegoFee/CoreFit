@@ -48,7 +48,7 @@ Sistema completo para la gestión de gimnasios pequeños que funciona con tarjet
 
 2. **Configurar la base de datos**
    - Abrir phpMyAdmin (http://localhost/phpmyadmin)
-   - Ejecutar el archivo `corefit.sql` para crear la base de datos y tablas
+   - Ejecutar las consultas del archivo `corefit.sql` para crear la base de datos y tablas
 
 3. **Configurar la conexión**
    - Verificar que `conexionMysql.php` tenga las credenciales correctas
@@ -190,7 +190,7 @@ El sistema está preparado para trabajar con lectores de tarjetas RFID que:
 
 ## Soporte
 
-Para soporte técnico o consultas sobre el sistema CoreFit, contactar al equipo de desarrollo de NovaCorp.
+Para soporte técnico o consultas sobre el sistema CoreFit, contactar al equipo de desarrollo de NovaCorp (este GitHub).
 
 ---
 
