@@ -119,6 +119,7 @@ CONTENIDO
   padding: 0.4rem 1rem;
   cursor: pointer;
   transition: background 0.2s;
+  text-decoration: none;
 }
 .option-btn:hover {
   background: var(--lime);

@@ -122,8 +122,11 @@ CONTENIDO
   border: none;
   border-radius: var(--radius);
   padding: 0.4rem 1rem;
+  margin: 0.5rem;
   cursor: pointer;
   transition: background 0.2s;
+  overflow: hidden;
+  text-decoration: none;
 }
 
 .option-btn:hover {

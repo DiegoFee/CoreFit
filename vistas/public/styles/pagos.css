@@ -79,6 +79,8 @@ CONTENIDO
 
 /* tabla de pagos ____________________________________________________________________- */
 .table-responsive {
+  width: 100%;
+  overflow-x: auto;
   background: var(--white);
   border-radius: 12px;
   padding: 14px;
@@ -88,6 +90,7 @@ CONTENIDO
 .members-table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 900px;
   font-size: 0.95rem;
 }
 .members-table thead th {
